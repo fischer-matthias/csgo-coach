@@ -3,14 +3,14 @@ const   express     = require('express'),
         http        = require('http').Server(express),
         socket      = require('socket.io')(http),
         fs          = require('fs'),
-        CONFIG      = require('./config')
+        config      = require('./config')
         logger      = require('./logger')
         inputServer = require('./inputServer'),
         webServer   = require('./webServer');
 
 
 // Start applications
-inputServer.listen(CONFIG.HOST, CONFIG.PORT_INPUT_SERVER);
+inputServer.listen(config.HOST, config.INPUT_SERVER_PORT);
 
 // Start web-server
-webServer.listen(CONFIG.PORT_WEB_SERVER);
+webServer.listen(config.WEB_SERVER_PORT);

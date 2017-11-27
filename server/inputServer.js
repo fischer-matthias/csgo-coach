@@ -1,6 +1,6 @@
 const   http        = require('http'),
         logger      = require('./logger'),
-        CONFIG      = require('./config');
+        config      = require('./config');
 
 
 const inputServer = http.createServer( function(req, res) {
@@ -27,7 +27,7 @@ const inputServer = http.createServer( function(req, res) {
     {
         logger.log("Not expecting other request types...");
         res.writeHead(200, {'Content-Type': 'text/html'});
-        var html = '<html><body>HTTP Server at http://' + CONFIG.HOST + ':' + CONFIG.PORT + '</body></html>';
+        var html = '<html><body>HTTP Server at http://' + config.HOST + ':' + config.INPUT_SERVER_PORT + '</body></html>';
         res.end(html);
     }
  
