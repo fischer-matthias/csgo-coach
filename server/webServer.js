@@ -4,7 +4,7 @@ const   express     = require('express')(),
         logger      = require('./logger');
 
 express.get('/', function(req, res){
-    res.sendFile(__dirname + '/web-app/index.html');
+    res.sendFile(__dirname + '/../app/index.html');
 });
 
 socket.on('connection', function(socket){
