@@ -8,8 +8,8 @@
 
 ## Technical implementation
 Every client needs to set a specific counter-strike config file, 
-so that the csgo client send necessary player-informations to the web-application.
-At the otherside a nodejs application collects, processes and sends the data to an angular application.
+so that the csgo client is able to send necessary player-informations to the server-application(backend).
+At the otherside a nodejs application collects, processes and sends the data to an angular application(frontend).
 
 ## Used sources
 - [Steam csgo api](https://developer.valvesoftware.com/wiki/Counter-Strike:_Global_Offensive_Game_State_Integration)
