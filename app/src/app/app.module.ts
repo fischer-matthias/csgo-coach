@@ -1,11 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 
 import { AppComponent } from './app.component';
-import { SocketService } from './socket.service';
-
-const config: SocketIoConfig = { url: 'http://localhost:4200', options: {} };
+import { CSGOCoachModule } from './csgo-coach/csgo-coach.module';
 
 @NgModule({
   declarations: [
@@ -13,10 +10,9 @@ const config: SocketIoConfig = { url: 'http://localhost:4200', options: {} };
   ],
   imports: [
     BrowserModule,
-    SocketIoModule.forRoot(config)
+    CSGOCoachModule
   ],
   providers: [
-    SocketService
   ],
   bootstrap: [AppComponent]
 })

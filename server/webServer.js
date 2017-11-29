@@ -29,3 +29,7 @@ module.exports.listen = function(port) {
         logger.log('Start web server on *:' + port + '.');
     });
 }
+
+module.exports.emit = function(data) {
+    socket.emit('message', JSON.stringify(data));
+}

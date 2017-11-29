@@ -2,6 +2,7 @@ const   http        = require('http'),
         logger      = require('./logger'),
         config      = require('./config');
 
+var __socketEmitFunction = null;
 
 const inputServer = http.createServer( function(req, res) {
  
@@ -18,6 +19,10 @@ const inputServer = http.createServer( function(req, res) {
             // extract necessary objects
             var currentPlayer = data['player'];
             var gameData = data['map'];
+
+            if(__socketEmitFunction !== null) {
+                __socketEmitFunction(currentPlayer);
+            }
         });
         req.on('end', function () {
             res.end( '' );
@@ -33,7 +38,8 @@ const inputServer = http.createServer( function(req, res) {
  
 });
 
-module.exports.listen = function(host, port) {
+module.exports.listen = function(host, port, socketEmitFunction) {
+    __socketEmitFunction = socketEmitFunction;
     inputServer.listen(port, host);
     logger.log('Start input Server on ' + host + ':' + port + '.');
 }
