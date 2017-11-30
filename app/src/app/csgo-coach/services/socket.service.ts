@@ -7,7 +7,8 @@ import { LoggerService } from './logger.service';
 @Injectable()
 export class SocketService {
 
-  private behaviorSubject: BehaviorSubject<any>;
+  private behaviorMapSubject: BehaviorSubject<any>;
+  private behaviorPlayerSubject: BehaviorSubject<any>;
 
   private ioSocket;
   private url = 'http://localhost';
@@ -21,20 +22,33 @@ export class SocketService {
   }
 
   private initBehaviorSubject(): void {
-    this.behaviorSubject = new BehaviorSubject(null);
+    this.behaviorMapSubject = new BehaviorSubject(null);
+    this.behaviorPlayerSubject = new BehaviorSubject(null);
   }
 
   private initSocket(): void {
 
     this.ioSocket = io.connect(this.url + ':' + this.port);
     this.ioSocket.on('message', (data) => {
-      this.logger.log(data);
-      this.behaviorSubject.next(data);
+
+      const dataObject = JSON.parse(data);
+      this.logger.log(dataObject);
+
+      const map = dataObject['map'];
+      const player = dataObject['player'];
+
+      if(map) {
+        this.behaviorMapSubject.next(map);
+      }
+
+      if(player) {
+        this.behaviorPlayerSubject.next(player);
+      }
     });
   }
 
-  public getObservable(): Observable<any> {
-    return this.behaviorSubject;
+  public getMapObservable(): Observable<any> {
+    return this.behaviorMapSubject;
   }
 
 }

@@ -21,7 +21,7 @@ const inputServer = http.createServer( function(req, res) {
             var gameData = data['map'];
 
             if(__socketEmitFunction !== null) {
-                __socketEmitFunction(currentPlayer);
+                __socketEmitFunction(data);
             }
         });
         req.on('end', function () {

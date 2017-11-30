@@ -1,3 +1,16 @@
-<p>
-  game-overview works!
-</p>
+<mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="team-symbol-ct"></div>
+      <div>VS</div>
+      <div mat-card-avatar class="team-symbol-t"></div>
+      <mat-card-title>Game overview</mat-card-title>
+    </mat-card-header>
+    <img *ngIf="mapInfo" class="map-image" mat-card-image src="assets/images/maps/{{mapInfo?.name}}.jpg">
+    <mat-card-content>
+
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>LIKE</button>
+      <button mat-button>SHARE</button>
+    </mat-card-actions>
+  </mat-card>

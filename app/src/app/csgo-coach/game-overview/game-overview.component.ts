@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+
+import { SocketService } from '../services/socket.service';
+import { LoggerService } from '../services/logger.service';
 
 @Component({
   selector: 'app-game-overview',
@@ -7,7 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameOverviewComponent implements OnInit {
 
-  constructor() { }
+  mapInfo: any;
+
+  constructor(public logger: LoggerService,
+              public socketService: SocketService) {
+
+    this.logger.log('Start application.');
+
+    this.socketService.getMapObservable().subscribe((data) => {
+      this.logger.log(data);
+      this.mapInfo = data;
+    });
+  }
 
   ngOnInit() {
   }

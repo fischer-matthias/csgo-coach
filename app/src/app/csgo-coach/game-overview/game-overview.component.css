@@ -1,0 +1,17 @@
+.example-card {
+  width: 100%;
+}
+  
+.team-symbol-ct {
+  background-size: cover;
+  background-image: 'assets/images/csgo_ct.png'
+}
+
+.team-symbol-t {
+  background-size: cover;
+  background-image: 'assets/images/csgo_t.png'
+}
+
+.map-image {
+  max-width: 400px;
+}

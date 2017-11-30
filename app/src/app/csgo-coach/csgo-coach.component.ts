@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SocketService } from './services/socket.service';
-import { LoggerService } from './services/logger.service';
 
 @Component({
   selector: 'app-csgo-coach',
@@ -9,14 +7,6 @@ import { LoggerService } from './services/logger.service';
 })
 export class CsgoCoachComponent {
 
-  constructor(public logger: LoggerService,
-              public socketService: SocketService) {
-
-      this.logger.log('Start application.');
-
-      this.socketService.getObservable().subscribe((data) => {
-        this.logger.log(data);
-      });
-    }
+  constructor() { }
 
 }
