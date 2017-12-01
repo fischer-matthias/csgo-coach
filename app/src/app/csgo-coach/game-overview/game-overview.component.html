@@ -1,9 +1,8 @@
 <mat-card class="example-card">
     <mat-card-header>
-      <div mat-card-avatar class="team-symbol-ct"></div>
-      <div>VS</div>
-      <div mat-card-avatar class="team-symbol-t"></div>
-      <mat-card-title>Game overview</mat-card-title>
+      <img src="assets/images/team_ct.png" class="team-symbol" />
+      <div class="map_points">VS</div>
+      <img src="assets/images/team_t.png" class="team-symbol" />
     </mat-card-header>
     <img *ngIf="mapInfo" class="map-image" mat-card-image src="assets/images/maps/{{mapInfo?.name}}.jpg">
     <mat-card-content>

@@ -1,15 +1,16 @@
 .example-card {
   width: 100%;
 }
-  
-.team-symbol-ct {
-  background-size: cover;
-  background-image: 'assets/images/csgo_ct.png'
+
+.team-symbol {
+  width: 100px;
+  height: 100px;
 }
 
-.team-symbol-t {
-  background-size: cover;
-  background-image: 'assets/images/csgo_t.png'
+.map_points {
+  padding-top: 40px;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 .map-image {
