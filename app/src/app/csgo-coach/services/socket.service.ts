@@ -3,6 +3,7 @@ import * as io from 'socket.io-client';
 import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
 import { LoggerService } from './logger.service';
+import {Player} from "../models/player";
 
 @Injectable()
 export class SocketService {
@@ -32,10 +33,9 @@ export class SocketService {
     this.ioSocket.on('message', (data) => {
 
       const dataObject = JSON.parse(data);
-      this.logger.log(dataObject);
 
       const map = dataObject['map'];
-      const player = dataObject['player'];
+      const player = dataObject['player'] as Player;
 
       if(map) {
         this.behaviorMapSubject.next(map);
@@ -49,6 +49,10 @@ export class SocketService {
 
   public getMapObservable(): Observable<any> {
     return this.behaviorMapSubject;
+  }
+
+  public getPlayerObservable(): Observable<Player> {
+    return this.behaviorPlayerSubject;
   }
 
 }

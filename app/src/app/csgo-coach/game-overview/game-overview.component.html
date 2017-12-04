@@ -1,16 +1,16 @@
-<mat-card class="example-card">
-    <mat-card-header>
-      <div mat-card-avatar class="team-symbol-ct"></div>
-      <div>VS</div>
-      <div mat-card-avatar class="team-symbol-t"></div>
-      <mat-card-title>Game overview</mat-card-title>
-    </mat-card-header>
-    <img *ngIf="mapInfo" class="map-image" mat-card-image src="assets/images/maps/{{mapInfo?.name}}.jpg">
-    <mat-card-content>
+<mat-card class="game-overview-card">
 
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button>LIKE</button>
-      <button mat-button>SHARE</button>
-    </mat-card-actions>
-  </mat-card>
+  <mat-card-header>
+    <img *ngIf="mapInfo" class="map-image" src="assets/images/maps/{{mapInfo?.name}}.jpg">
+    <div><img src="assets/images/team_ct.png" class="team-symbol" /></div>
+    <div class="versus"> {{mapInfo?.team_ct.score}} - {{mapInfo?.team_t.score}}</div>
+    <div><img src="assets/images/team_t.png" class="team-symbol" /></div>
+  </mat-card-header>
+
+
+</mat-card>
+
+<mat-card class="game-overview-card">
+  <mat-card-title>Team-Members</mat-card-title>
+  <app-player [player]="player"></app-player>
+</mat-card>

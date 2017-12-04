@@ -1,17 +1,24 @@
-.example-card {
-  width: 100%;
-}
-  
-.team-symbol-ct {
-  background-size: cover;
-  background-image: 'assets/images/csgo_ct.png'
+.game-overview-card {
+  margin-top: 8px;
 }
 
-.team-symbol-t {
-  background-size: cover;
-  background-image: 'assets/images/csgo_t.png'
+.team-symbol {
+  padding-top: 8px;
+  width: 50px;
+}
+
+.versus {
+  margin-left: 16px;
+  margin-right: 16px;
+
+  padding-top: 24px;
+  font-weight: bold;
 }
 
 .map-image {
-  max-width: 400px;
+  margin-right: 16px;
+
+  max-width: 105px;
+  max-height: 65px;
+  border: 1px black solid;
 }

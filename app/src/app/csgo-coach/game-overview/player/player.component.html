@@ -1,0 +1,9 @@
+<mat-list>
+  <mat-list-item *ngIf="player">
+    <img matListAvatar src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/07/0791da2319ec91d38946a3a816550a36ec508f28.jpg">
+    <h3 matLine> {{player?.name}} </h3>
+    <p matLine *ngIf="player.match_stats">
+      <span> K {{player?.match_stats?.kills}} / A {{player?.match_stats?.assists}} / D {{player?.match_stats?.deaths}} </span>
+    </p>
+  </mat-list-item>
+</mat-list>
