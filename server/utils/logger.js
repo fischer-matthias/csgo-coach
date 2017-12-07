@@ -1,4 +1,4 @@
- const CONFIG = require('./config');
+ const CONFIG = require('../config');
 
 // Default logging function
 var _logger = function(message) {
