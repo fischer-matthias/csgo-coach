@@ -2,7 +2,7 @@ const   express     = require('express'),
         bodyParser  = require('body-parser'),
         path        = require('path'),
 
-        logger      = require('../utils/logger'),
+        logger      = require('../utils/logger')(),
         config      = require('../config'),
         
         router      = express.Router();

@@ -1,20 +1,24 @@
- const CONFIG = require('../config');
+module.exports = function() {
+    const CONFIG = require('../config');
 
-// Default logging function
-var _logger = function(message) {
-    if(CONFIG.LOGGING_ENABLED) {
+    var logger = {};
 
-        var currentDate = new Date();
+    // Default logging function
+    logger.log = function(message) {
+        if(CONFIG.LOGGING_ENABLED) {
 
-        var currentTimeStamp = currentDate.getDate() + '/'
-            + (currentDate.getMonth()+1)  + '/' 
-            + currentDate.getFullYear() + ' @ '  
-            + currentDate.getHours() + ':'  
-            + currentDate.getMinutes() + ':' 
-            + currentDate.getSeconds();
+            var currentDate = new Date();
 
-        console.log(currentTimeStamp + ': ' + message);
-    }
+            var currentTimeStamp = currentDate.getDate() + '/'
+                + (currentDate.getMonth()+1)  + '/'
+                + currentDate.getFullYear() + ' @ '
+                + currentDate.getHours() + ':'
+                + currentDate.getMinutes() + ':'
+                + currentDate.getSeconds();
+
+            console.log(currentTimeStamp + ': ' + message);
+        }
+    };
+
+    return logger;
 };
-
-module.exports.log = _logger;

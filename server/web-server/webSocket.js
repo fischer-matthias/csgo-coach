@@ -1,17 +1,17 @@
-modules.exports = function(http) {
+module.exports = function() {
 
     const logger = require('../utils/logger');
 
     var webSocket = {};
     var socket = null;
 
-    webSocket.init = function() {
+    webSocket.init = function(http) {
         socket = require('socket.io')(http);
-    }
+    };
 
     webSocket.emitMessage = function(message) {
         socket.emit('message', JSON.stringify(data));
-    }
+    };
 
     function onConnection() {
         socket.on('connection', function(socket){
@@ -23,4 +23,4 @@ modules.exports = function(http) {
     }
 
     return webSocket;
-}
+};

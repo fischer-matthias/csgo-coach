@@ -7,11 +7,11 @@ module.exports = function(webSocket) {
 
     inputServer.init = function() {
         startListening();
-    }
+    };
 
     function startListening() {
-        http.createServer(requestHandling).listen(config.INPUT_SERVER_PORT, config.INPUT_SERVER_HOST)
-        logger.log('Start input Server on ' + host + ':' + port + '.');
+        http.createServer(requestHandling).listen(config.INPUT_SERVER_PORT, config.INPUT_SERVER_HOST);
+        logger.log('Start input Server on ' + config.INPUT_SERVER_HOST + ':' + config.INPUT_SERVER_PORT + '.');
     }
 
     function requestHandling(req, res) {
@@ -48,4 +48,4 @@ module.exports = function(webSocket) {
     }
 
     return inputServer;
-}
+};

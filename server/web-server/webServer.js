@@ -5,16 +5,19 @@ module.exports = function() {
             http        = require('http').Server(app),
             staticFiles = require('./staticFileRoutes'),
             config      = require('../config'),
-            logger      = require('../utils/logger');
+            logger      = require('../utils/logger')();
 
     var webServer = {};
 
-    webServer.webSocket = require('./webSocket')(http);
+    webServer.webSocket = require('./webSocket')();
 
     webServer.init = function() {
+
+        webServer.webSocket.init(http);
+
         registerRoutes();
         listenOnPort();
-    }
+    };
 
     function registerRoutes() {
         app.use('/', staticFiles);
@@ -27,4 +30,4 @@ module.exports = function() {
     }
     
     return webServer;
-}
+};
