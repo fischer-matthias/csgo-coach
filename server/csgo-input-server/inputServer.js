@@ -1,6 +1,6 @@
 module.exports = function(webSocket) {
     const   http        = require('http'),
-            logger      = require('../utils/logger'),
+            logger      = require('../utils/logger')(),
             config      = require('../config');
 
     var inputServer = {};
