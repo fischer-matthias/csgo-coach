@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { LoggerService } from './logger.service';
-import {Player} from "../models/player";
+import { Player } from '../models/player';
 
 @Injectable()
 export class SocketService {
-
   private behaviorMapSubject: BehaviorSubject<any>;
   private behaviorPlayerSubject: BehaviorSubject<any>;
 
@@ -28,20 +27,18 @@ export class SocketService {
   }
 
   private initSocket(): void {
-
     this.ioSocket = io.connect(this.url + ':' + this.port);
-    this.ioSocket.on('message', (data) => {
-
+    this.ioSocket.on('message', data => {
       const dataObject = JSON.parse(data);
 
       const map = dataObject['map'];
       const player = dataObject['player'] as Player;
 
-      if(map) {
+      if (map) {
         this.behaviorMapSubject.next(map);
       }
 
-      if(player) {
+      if (player) {
         this.behaviorPlayerSubject.next(player);
       }
     });
@@ -54,5 +51,4 @@ export class SocketService {
   public getPlayerObservable(): Observable<Player> {
     return this.behaviorPlayerSubject;
   }
-
 }
