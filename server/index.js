@@ -1,8 +1,5 @@
-const   webServer   = require('./web-server/webServer')(),
-        inputServer = require('./csgo-input-server/inputServer')(webServer.webSocket);
+const webServer = require('./web-server/webServer')();
+const database = require('./utils/database')();
 
 // Start web-server
 webServer.init();
-
-// Start csgo-input-server
-inputServer.init();

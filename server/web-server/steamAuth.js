@@ -5,26 +5,26 @@ module.exports = function() {
     const bodyParser  = require('body-parser');
 
     const steamAuth = {};
-    steamAuth.router = express.Router();
+    steamAuth.routes = express.Router();
 
     // prepare express server
-    steamAuth.router.use(bodyParser.json());
-    steamAuth.router.use(bodyParser.urlencoded({extended: false}))
+    steamAuth.routes.use(bodyParser.json());
+    steamAuth.routes.use(bodyParser.urlencoded({extended: false}));
 
-    steamAuth.router.route('/authenticate').get(steam.authenticate(), function(req, res) {
+    steamAuth.routes.route('/authenticate').get(steam.authenticate(), function(req, res) {
         res.redirect('/');
     });
 
-    steamAuth.router.route('/verify').get(steam.verify(), function(req, res) {
+    steamAuth.routes.route('/verify').get(steam.verify(), function(req, res) {
         res.redirect('/');
     });
 
-    steamAuth.router.route('/logout').get(steam.enforceLogin('/'), function(req, res) {
+    steamAuth.routes.route('/logout').get(steam.enforceLogin('/'), function(req, res) {
         req.logout();
         res.redirect('/');
     });
 
-    steamAuth.router.route('/status').get(function(req, res) {
+    steamAuth.routes.route('/status').get(function(req, res) {
         if(req.user == null) {
             res.send({user: null});
         } else {

@@ -1,37 +1,39 @@
-module.exports = function() {
-    
-    const   express             = require('express'),
-            steam               = require('steam-login'),
+module.exports = function () {
 
-            app                 = express(),
-            http                = require('http').Server(app),
-            steamAuth           = require('./steam-auth')();
+    const express = require('express');
+    const steam = require('steam-login');
+    const app = express();
+    const http = require('http').Server(app);
 
-            staticFileRoutes    = require('./staticFileRoutes'),
-            apiRoutes           = require('./apiRoutes'),
-
-            config              = require('../config'),
-            logger              = require('../utils/logger')();
+    const config = require('../config');
+    const logger = require('../utils/logger')();
 
     var webServer = {};
-    webServer.webSocket = require('./webSocket')();
+    webServer.webSocket = require('./webSocket')(http);
 
-    webServer.init = function() {
+    webServer.static = require('./routes/static')();
+    webServer.csgo = require('./routes/csgo')(webServer.webSocket);
 
-        webServer.webSocket.init(http);
+    webServer.steamAuth = require('./steamAuth')();
+    webServer.api = require('./routes/api')();
+
+    webServer.init = function () {
+
         prepareLogging();
-
-        app.use(require('express-session')({ resave: false, saveUninitialized: false, secret: 'a secret' }));
-
+        prepareSessionHandling();
         prepareSteamAuth();
         registerRoutes();
-        
+
         listen();
     };
 
+    function prepareSessionHandling() {
+        app.use(require('express-session')({resave: false, saveUninitialized: false, secret: config.SESSION_SECRET}));
+    }
+
     function prepareLogging() {
-        app.use(function(req, res, next) {
-            logger.log('Request to api with request "' + req.path + '" and body "' + req.body + '"');
+        app.use(function (req, res, next) {
+            logger.log('IP: ' + req.ip + ' / Request to api with request "' + req.path + '" and body "' + req.body + '"');
             next();
         });
     }
@@ -47,16 +49,17 @@ module.exports = function() {
     }
 
     function registerRoutes() {
-        app.use('/', staticFileRoutes);
-        app.use('/api/', apiRoutes);
-        app.use('/steam/', steamAuth.router);
+        app.use('/', webServer.static.routes);
+        app.use('/api/', webServer.api.routes);
+        app.use('/steam/', webServer.steamAuth.routes);
+        app.use('/csgo/', webServer.csgo.routes);
     }
 
     function listen() {
-        http.listen(config.WEB_SERVER_PORT, function(){
+        http.listen(config.WEB_SERVER_PORT, function () {
             logger.log('Start web server on *:' + config.WEB_SERVER_PORT + '.');
         });
     }
-    
+
     return webServer;
 };

@@ -22,6 +22,8 @@
     "express-session": "^1.15.6",
     "fs": "0.0.1-security",
     "http": "0.0.0",
+    "kerberos": "0.0.23",
+    "mongodb": "^3.0.0-rc0",
     "path": "^0.12.7",
     "socket.io": "^2.0.4",
     "steam-login": "^0.1.6"
