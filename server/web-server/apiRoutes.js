@@ -5,7 +5,15 @@ const   express     = require('express'),
         logger      = require('../utils/logger')(),
         config      = require('../config'),
 
-router      = express.Router();
+router = express.Router();
+
+router.use(function(req, res, next) {
+    if(req.user == null) {
+        res.send({error: 'permission denied'});
+    } else {
+        next();
+    }
+});
 
 router.route('/').get(function(req, res){
     res.send({test: "hallo"});

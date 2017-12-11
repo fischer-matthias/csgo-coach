@@ -5,9 +5,11 @@ module.exports = function() {
 
             app                 = express(),
             http                = require('http').Server(app),
+            steamAuth           = require('./steam-auth')();
 
             staticFileRoutes    = require('./staticFileRoutes'),
             apiRoutes           = require('./apiRoutes'),
+
             config              = require('../config'),
             logger              = require('../utils/logger')();
 
@@ -18,6 +20,8 @@ module.exports = function() {
 
         webServer.webSocket.init(http);
         prepareLogging();
+
+        app.use(require('express-session')({ resave: false, saveUninitialized: false, secret: 'a secret' }));
 
         prepareSteamAuth();
         registerRoutes();
@@ -33,34 +37,19 @@ module.exports = function() {
     }
 
     function prepareSteamAuth() {
-        app.use(require('express-session')({ resave: false, saveUninitialized: false, secret: 'a secret' }));
+
         app.use(steam.middleware({
-            realm: config.WEB_SERVER_URL + ':' + config.WEB_SERVER_PORT + '/', 
-            verify: config.WEB_SERVER_URL + ':' + config.WEB_SERVER_PORT + '/verify',
+            realm: config.WEB_SERVER_URL + ':' + config.WEB_SERVER_PORT + '/',
+            verify: config.WEB_SERVER_URL + ':' + config.WEB_SERVER_PORT + '/steam/verify',
             apiKey: config.STEAM_API_KEY
         }));
 
-        app.get('/authenticate', steam.authenticate(), function(req, res) {
-            res.redirect('/');
-        });
-
-        app.get('/verify', steam.verify(), function(req, res) {
-            res.redirect('/');
-        });
-
-        app.get('/logout', steam.enforceLogin('/'), function(req, res) {
-            req.logout();
-            res.redirect('/');
-        });
-
-        app.get('test', function(req, res) {
-
-        });
     }
 
     function registerRoutes() {
         app.use('/', staticFileRoutes);
         app.use('/api/', apiRoutes);
+        app.use('/steam/', steamAuth.router);
     }
 
     function listen() {

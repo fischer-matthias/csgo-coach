@@ -10,7 +10,7 @@ module.exports = function() {
     };
 
     webSocket.emitMessage = function(message) {
-        socket.emit('message', JSON.stringify(data));
+        socket.emit('message', JSON.stringify(message));
     };
 
     function onConnection() {

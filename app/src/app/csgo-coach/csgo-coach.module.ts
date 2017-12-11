@@ -18,6 +18,7 @@ import { CsgoCoachComponent } from './csgo-coach.component';
 import { GameOverviewComponent } from './game-overview/game-overview.component';
 import { PlayerComponent } from './game-overview/player/player.component';
 import { HomeComponent } from './home/home.component';
+import { SteamAuthService } from "./services/steam-auth.service";
 
 @NgModule({
   declarations: [
@@ -36,8 +37,9 @@ import { HomeComponent } from './home/home.component';
     MatCardModule,
     MatListModule
   ],
-  providers: [LoggerService, SocketService, SteamUserService],
+  providers: [LoggerService, SteamAuthService, SocketService, SteamUserService],
   exports: [CsgoCoachComponent]
 })
 
-export class CSGOCoachModule {}
+export class CSGOCoachModule {
+}
