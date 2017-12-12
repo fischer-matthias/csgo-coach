@@ -2,3 +2,5 @@
 **/dist/
 
 .idea/
+
+server/config.js
