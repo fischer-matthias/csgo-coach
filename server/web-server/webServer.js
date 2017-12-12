@@ -5,6 +5,8 @@ module.exports = function () {
     const app = express();
     const http = require('http').Server(app);
 
+
+    const database = require('../utils/database')();
     const config = require('../config');
     const logger = require('../utils/logger')();
 
@@ -14,7 +16,7 @@ module.exports = function () {
     webServer.static = require('./routes/static')();
     webServer.csgo = require('./routes/csgo')(webServer.webSocket);
 
-    webServer.steamAuth = require('./steamAuth')();
+    webServer.steamAuth = require('./steamAuth')(database);
     webServer.api = require('./routes/api')();
 
     webServer.init = function () {

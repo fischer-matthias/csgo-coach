@@ -1,4 +1,4 @@
-module.exports = function() {
+module.exports = function(database) {
 
     const express = require('express');
     const steam = require('steam-login');
@@ -16,6 +16,9 @@ module.exports = function() {
     });
 
     steamAuth.routes.route('/verify').get(steam.verify(), function(req, res) {
+        if(req.user) {
+            database.addUser(req.user._json.steamid);
+        }
         res.redirect('/');
     });
 
