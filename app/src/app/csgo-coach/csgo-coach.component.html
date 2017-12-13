@@ -4,7 +4,9 @@
   <!-- This fills the remaining space of the current row -->
   <span class="fill-remaining-space"></span>
 
-  <button mat-button>Logout</button>
+  <form *ngIf="loggedIn" action="/steam/logout">
+    <button mat-button>Logout</button>
+  </form>
 </mat-toolbar>
 
-<app-game-overview></app-game-overview>
+<router-outlet></router-outlet>

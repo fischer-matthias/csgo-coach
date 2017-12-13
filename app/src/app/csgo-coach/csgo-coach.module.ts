@@ -12,13 +12,16 @@ import { MatListModule } from '@angular/material/list';
 
 import { SocketService } from './services/socket.service';
 import { LoggerService } from './services/logger.service';
+import { SteamAuthService } from './services/steam-auth.service';
+import { SteamAuthGuard } from './services/steam-auth.guard';
+
 import { SteamUserService } from './services/steam-user.service';
+
 import { CsgoCoachComponent } from './csgo-coach.component';
+import { HomeComponent } from './home/home.component';
 
 import { GameOverviewComponent } from './game-overview/game-overview.component';
 import { PlayerComponent } from './game-overview/player/player.component';
-import { HomeComponent } from './home/home.component';
-import { SteamAuthService } from "./services/steam-auth.service";
 
 @NgModule({
   declarations: [
@@ -37,7 +40,7 @@ import { SteamAuthService } from "./services/steam-auth.service";
     MatCardModule,
     MatListModule
   ],
-  providers: [LoggerService, SteamAuthService, SocketService, SteamUserService],
+  providers: [LoggerService, SteamAuthService, SteamAuthGuard, SocketService, SteamUserService],
   exports: [CsgoCoachComponent]
 })
 

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SteamAuthService } from "../services/steam-auth.service";
+import { Router } from '@angular/router';
+import { SteamAuthService } from '../services/steam-auth.service';
+import { LoggerService } from '../services/logger.service';
 
 @Component({
   selector: 'app-home',
@@ -8,8 +10,19 @@ import { SteamAuthService } from "../services/steam-auth.service";
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private steamAuth: SteamAuthService) {
-    console.log(this.steamAuth.isLoggedIn());
+  constructor(private steamAuth: SteamAuthService,
+              private logger: LoggerService,
+              private router: Router) {
+
+    this.steamAuth.isLoggedIn()
+      .then((result) => {
+        if (result) {
+          this.router.navigate(['/game-overview']);
+          this.logger.log('User is logged in.');
+        } else {
+          this.logger.log('User is not logged in.');
+        }
+      });
   }
 
   ngOnInit() {

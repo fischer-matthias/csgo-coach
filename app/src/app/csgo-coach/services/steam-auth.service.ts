@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class SteamAuthService {
@@ -8,21 +8,36 @@ export class SteamAuthService {
   private userStatus: any;
 
   constructor(private httpClient: HttpClient) {
-    this.loggedIn = false;
     this.getUserStatus();
   }
 
-  private getUserStatus(): any {
-    this.httpClient.get('/steam/status').subscribe((status) => {
-      this.userStatus = status;
+  private getUserStatus(): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      this.httpClient.get('/steam/status').subscribe((status) => {
 
-      if(this.userStatus.user) {
-        this.loggedIn = true;
-      }
+        if (status === null || status['user'] === null) {
+          this.loggedIn = false;
+        } else {
+          this.userStatus = status;
+          this.loggedIn = true;
+        }
+
+        resolve(true);
+      });
+
     });
   }
 
-  public isLoggedIn(): boolean {
-    return this.loggedIn;
+  public isLoggedIn(): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      if (this.loggedIn !== undefined) {
+        resolve(this.loggedIn);
+      } else {
+        this.getUserStatus()
+          .then((__resolve) => {
+            resolve(this.loggedIn);
+          });
+      }
+    });
   }
 }
