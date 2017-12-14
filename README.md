@@ -6,6 +6,10 @@
 - [ ] Live game integration with visualization of player loadout and round history
 - [ ] Visualization of round-tasks for an specific player during the execute
 
+## Possible features
+- Enemy economy tracker #8
+- Bomb time tracker #9
+
 ## Technical implementation
 Every client needs to set a specific counter-strike config file, 
 so that the csgo client is able to send necessary player-informations to the server-application(backend).
