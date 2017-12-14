@@ -7,8 +7,8 @@
 - [ ] Visualization of round-tasks for an specific player during the execute
 
 ## Possible features
-- Enemy economy tracker #8
-- Bomb time tracker #9
+- Enemy economy tracker [#8](https://github.com/matze6633/csgo-coach/issues/8)
+- Bomb time [#9](https://github.com/matze6633/csgo-coach/issues/9)
 
 ## Technical implementation
 Every client needs to set a specific counter-strike config file, 
