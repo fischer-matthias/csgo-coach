@@ -1,6 +1,6 @@
-import {PlayerState} from "./player-state";
-import {PlayerWeapon} from "./player-weapon";
-import {PlayerMatchStats} from "./player-match-stats";
+import {PlayerState} from './player-state';
+import {PlayerWeapon} from './player-weapon';
+import {PlayerMatchStats} from './player-match-stats';
 
 export class Player {
   steamid: string;

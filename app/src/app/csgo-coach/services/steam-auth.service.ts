@@ -40,4 +40,8 @@ export class SteamAuthService {
       }
     });
   }
+
+  public getUserId(): string {
+    return this.userStatus.uid;
+  }
 }

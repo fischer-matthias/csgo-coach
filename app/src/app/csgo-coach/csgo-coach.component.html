@@ -9,4 +9,11 @@
   </form>
 </mat-toolbar>
 
+<mat-tab-group>
+  <mat-tab label="Teams" (click)="navigate('/team-list')"></mat-tab>
+  <mat-tab label="Statistic" (click)="navigate('/')"></mat-tab>
+  <mat-tab label="Game Overview" (click)="navigate('/game-overview')"></mat-tab>
+</mat-tab-group>
+
+
 <router-outlet></router-outlet>

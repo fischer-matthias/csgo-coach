@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
@@ -9,6 +10,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { SocketService } from './services/socket.service';
 import { LoggerService } from './services/logger.service';
@@ -22,27 +24,35 @@ import { HomeComponent } from './home/home.component';
 
 import { GameOverviewComponent } from './game-overview/game-overview.component';
 import { PlayerComponent } from './game-overview/player/player.component';
+import { TeamListComponent } from './team-list/team-list.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
     CsgoCoachComponent,
     GameOverviewComponent,
+    TeamListComponent,
     PlayerComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     RouterModule.forRoot(CSGO_COACH_ROUTES),
 
     MatToolbarModule,
     MatButtonModule,
     MatCardModule,
-    MatListModule
+    MatListModule,
+    MatTabsModule
   ],
-  providers: [LoggerService, SteamAuthService, SteamAuthGuard, SocketService, SteamUserService],
+  providers: [
+    LoggerService,
+    SteamAuthService,
+    SteamAuthGuard,
+    SocketService,
+    SteamUserService
+  ],
   exports: [CsgoCoachComponent]
 })
-
-export class CSGOCoachModule {
-}
+export class CSGOCoachModule {}
