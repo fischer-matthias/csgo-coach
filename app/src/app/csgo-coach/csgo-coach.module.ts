@@ -25,6 +25,7 @@ import { HomeComponent } from './home/home.component';
 import { GameOverviewComponent } from './game-overview/game-overview.component';
 import { PlayerComponent } from './game-overview/player/player.component';
 import { TeamListComponent } from './team-list/team-list.component';
+import { TeamService } from './services/team.service';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { TeamListComponent } from './team-list/team-list.component';
     SteamAuthService,
     SteamAuthGuard,
     SocketService,
-    SteamUserService
+    SteamUserService,
+    TeamService
   ],
   exports: [CsgoCoachComponent]
 })

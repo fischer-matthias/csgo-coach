@@ -6,8 +6,8 @@ import { TeamListComponent } from './team-list/team-list.component';
 
 
 export const CSGO_COACH_ROUTES: Routes = [
-  {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
+  {path: '', redirectTo: '/team-list', pathMatch: 'full'},
   {path: 'team-list', canActivate: [SteamAuthGuard], component: TeamListComponent},
   {path: 'game-overview', canActivate: [SteamAuthGuard], component: GameOverviewComponent}
 ];

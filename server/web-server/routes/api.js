@@ -1,6 +1,7 @@
 module.exports = function() {
 
     const express = require('express');
+    const team = require('./team')();
 
     var api = {};
     api.routes = express.Router();
@@ -16,6 +17,8 @@ module.exports = function() {
     api.routes.route('/').get(function(req, res){
         res.send({test: "hallo"});
     });
+
+    // api.routes.use('/team', team.routes);
 
     return api;
 };

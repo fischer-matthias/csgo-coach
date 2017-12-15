@@ -34,5 +34,13 @@ module.exports = function () {
           });
     }
 
+    database.getTeams = function(uid) {
+        mongodbConnection.collection('Teams').find({"players.uid": uid})
+            .toArray(function(err, result) {
+                if(err) throw err;
+                return result;
+            })
+    }
+
     return database;
 };
