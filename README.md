@@ -1,6 +1,12 @@
 # CSGO Coach
  is a game-integrated stratbook application for csgo clans.
 
+- [Features](#features)
+- [Possible features](#possible-features)
+- [Technical implementation](#technical-implementation)
+- [Server-configuration file](#server-configuration-file)
+- [Credits](#credits)
+
 ## Features
 - [ ] Strat collection for each map with different tasks for every user via markdown/wysiwyg editor
 - [ ] Live game integration with visualization of player loadout and round history

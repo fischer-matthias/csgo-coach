@@ -22,17 +22,17 @@ module.exports = function(database) {
         res.redirect('/');
     });
 
-    steamAuth.routes.route('/logout').get(steam.enforceLogin('/'), function(req, res) {
-        req.logout();
-        res.redirect('/');
-    });
-
     steamAuth.routes.route('/status').get(function(req, res) {
         if(req.user == null) {
             res.send({user: null});
         } else {
             res.send({user: req.user});
         }
+    });
+
+    steamAuth.routes.route('/logout').get(steam.enforceLogin('/'), function(req, res) {
+        req.logout();
+        res.redirect('/');
     });
 
     return steamAuth;
