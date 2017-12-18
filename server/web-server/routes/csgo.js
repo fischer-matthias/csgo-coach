@@ -7,7 +7,6 @@ module.exports = function(webSocket) {
     csgo.webSocket = webSocket;
     csgo.routes = express.Router();
 
-    // prepare express server
     csgo.routes.use(bodyParser.json());
     csgo.routes.use(bodyParser.urlencoded({extended: false}));
 

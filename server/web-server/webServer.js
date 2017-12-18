@@ -5,19 +5,18 @@ module.exports = function () {
     const app = express();
     const http = require('http').Server(app);
 
-
-    const database = require('../utils/database')();
     const config = require('../config');
     const logger = require('../utils/logger')();
 
     var webServer = {};
-    webServer.webSocket = require('./webSocket')(http);
-
+    webServer.database = require('../utils/database')();
     webServer.static = require('./routes/static')();
+
+    webServer.webSocket = require('./webSocket')(http);
     webServer.csgo = require('./routes/csgo')(webServer.webSocket);
 
-    webServer.steamAuth = require('./steamAuth')(database);
-    webServer.api = require('./routes/api')();
+    webServer.steamAuth = require('./steamAuth')(webServer.database);
+    webServer.api = require('./routes/api')(webServer.database);
 
     webServer.init = function () {
 
