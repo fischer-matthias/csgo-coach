@@ -1,0 +1,12 @@
+.team-edit-card {
+    margin-top: 8px;
+}
+
+.team-edit-container {
+    display: flex;
+    flex-direction: column;
+}
+  
+.team-edit-container > * {
+    width: 100%;
+}

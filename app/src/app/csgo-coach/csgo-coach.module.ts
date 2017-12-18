@@ -11,6 +11,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
 
 import { SocketService } from './services/socket.service';
 import { LoggerService } from './services/logger.service';
@@ -24,8 +27,10 @@ import { HomeComponent } from './home/home.component';
 
 import { GameOverviewComponent } from './game-overview/game-overview.component';
 import { PlayerComponent } from './game-overview/player/player.component';
-import { TeamListComponent } from './team-list/team-list.component';
-import { TeamService } from './services/team.service';
+
+import { TeamListComponent } from './teams/team-list/team-list.component';
+import { TeamService } from './teams/team.service';
+import { TeamEditComponent } from './teams/team-edit/team-edit.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +38,7 @@ import { TeamService } from './services/team.service';
     CsgoCoachComponent,
     GameOverviewComponent,
     TeamListComponent,
+    TeamEditComponent,
     PlayerComponent
   ],
   imports: [
@@ -45,7 +51,10 @@ import { TeamService } from './services/team.service';
     MatButtonModule,
     MatCardModule,
     MatListModule,
-    MatTabsModule
+    MatTabsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule
   ],
   providers: [
     LoggerService,
@@ -57,4 +66,4 @@ import { TeamService } from './services/team.service';
   ],
   exports: [CsgoCoachComponent]
 })
-export class CSGOCoachModule {}
+export class CSGOCoachModule { }

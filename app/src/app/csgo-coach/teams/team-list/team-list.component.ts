@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Team } from '../models/team';
-import { TeamService } from '../services/team.service';
-import { SteamAuthService } from '../services/steam-auth.service';
+import { Team } from '../team';
+import { TeamService } from '../team.service';
+import { SteamAuthService } from '../../services/steam-auth.service';
 
 @Component({
     selector: 'app-team-list',

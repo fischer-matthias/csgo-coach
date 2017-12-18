@@ -9,7 +9,7 @@ import { LoggerService } from './services/logger.service';
     styleUrls: ['./csgo-coach.component.css']
 })
 export class CsgoCoachComponent {
-    private routes = ['/team-list', '/', '/game-overview'];
+    private routes = ['/teams/team-list', '/', '/game-overview'];
 
     public loggedIn = false;
 
