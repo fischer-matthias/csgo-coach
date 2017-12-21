@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
@@ -54,7 +55,8 @@ import { TeamEditComponent } from './teams/team-edit/team-edit.component';
     MatTabsModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatInputModule
+    MatInputModule,
+    MatGridListModule
   ],
   providers: [
     LoggerService,
@@ -66,4 +68,4 @@ import { TeamEditComponent } from './teams/team-edit/team-edit.component';
   ],
   exports: [CsgoCoachComponent]
 })
-export class CSGOCoachModule { }
+export class CSGOCoachModule {}

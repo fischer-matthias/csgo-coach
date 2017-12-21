@@ -1,11 +1,16 @@
 <mat-card class="game-overview-card">
 
-  <mat-card-header>
-    <img *ngIf="mapInfo" class="map-image" src="assets/images/maps/{{mapInfo?.name}}.jpg">
-    <div><img src="assets/images/team_ct.png" class="team-symbol" /></div>
-    <div class="versus"> {{mapInfo?.team_ct.score}} - {{mapInfo?.team_t.score}}</div>
-    <div><img src="assets/images/team_t.png" class="team-symbol" /></div>
-  </mat-card-header>
+  <img *ngIf="mapInfo" class="map-image" src="assets/images/maps/{{mapInfo?.name}}.jpg">
+
+  <mat-grid-list cols="3">
+    <mat-grid-tile>
+      <img src="assets/images/team_ct.png" class="team-symbol" />
+    </mat-grid-tile>
+    <mat-grid-tile>{{mapInfo?.team_ct.score}} - {{mapInfo?.team_t.score}}</mat-grid-tile>
+    <mat-grid-tile>
+      <img src="assets/images/team_t.png" class="team-symbol" />
+    </mat-grid-tile>
+  </mat-grid-list>
 
 
 </mat-card>

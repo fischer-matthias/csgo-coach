@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
     this.steamAuth.isLoggedIn()
       .then((result) => {
         if (result) {
-          this.router.navigate(['/game-overview']);
+          this.router.navigate(['/']);
           this.logger.log('User is logged in.');
         } else {
           this.logger.log('User is not logged in.');

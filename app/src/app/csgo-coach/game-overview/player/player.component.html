@@ -1,9 +1,31 @@
-<mat-list>
-  <mat-list-item *ngIf="player">
-    <img matListAvatar src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/07/0791da2319ec91d38946a3a816550a36ec508f28.jpg">
-    <h3 matLine> {{player?.name}} </h3>
-    <p matLine *ngIf="player.match_stats">
-      <span> K {{player?.match_stats?.kills}} / A {{player?.match_stats?.assists}} / D {{player?.match_stats?.deaths}} </span>
-    </p>
-  </mat-list-item>
-</mat-list>
+<mat-grid-list cols="6" rowHeight="40px">
+  <mat-grid-tile>
+    <img style="border-radius: 15px;" src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/07/0791da2319ec91d38946a3a816550a36ec508f28.jpg">
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="5">
+    <div>
+      <p style="margin:0; padding:0; font-weight:bold">{{player?.name}}</p>
+      <p style="margin:0; padding:0;" *ngIf="player.match_stats">
+        <span> K {{player?.match_stats?.kills}} / A {{player?.match_stats?.assists}} / D {{player?.match_stats?.deaths}} </span>
+      </p>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile *ngIf="player?.weapons?.weapon_1">
+    <img class="fit-size" src="/assets/images/weapons/{{player?.weapons?.weapon_1?.name}}.png" />
+  </mat-grid-tile>
+  <mat-grid-tile *ngIf="player?.weapons?.weapon_2">
+    <img class="fit-size" src="/assets/images/weapons/{{player?.weapons?.weapon_2?.name}}.png" />
+  </mat-grid-tile>
+  <mat-grid-tile *ngIf="player?.weapons?.weapon_3">
+    <img class="fit-size" src="/assets/images/weapons/{{player?.weapons?.weapon_3?.name}}.png" />
+  </mat-grid-tile>
+  <mat-grid-tile *ngIf="player?.weapons?.weapon_4">
+    <img class="fit-size" src="/assets/images/weapons/{{player?.weapons?.weapon_4?.name}}.png" />
+  </mat-grid-tile>
+  <mat-grid-tile *ngIf="player?.weapons?.weapon_5">
+    <img class="fit-size" src="/assets/images/weapons/{{player?.weapons?.weapon_5?.name}}.png" />
+  </mat-grid-tile>
+  <mat-grid-tile *ngIf="player?.weapons?.weapon_6">
+    <img class="fit-size" src="/assets/images/weapons/{{player?.weapons?.weapon_6?.name}}.png" />
+  </mat-grid-tile>
+</mat-grid-list>

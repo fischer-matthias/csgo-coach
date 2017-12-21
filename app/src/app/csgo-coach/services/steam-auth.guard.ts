@@ -14,7 +14,7 @@ export class SteamAuthGuard implements CanActivate {
         if (result) {
           resolve(true);
         } else {
-          this.router.navigate(['/']);
+          this.router.navigate(['/home']);
           resolve(false);
         }
       });

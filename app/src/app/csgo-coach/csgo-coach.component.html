@@ -9,7 +9,8 @@
   </form>
 </mat-toolbar>
 
-<mat-tab-group (selectedIndexChange)=tabSelectionChanged($event)>
+
+<mat-tab-group *ngIf="loggedIn" (selectedIndexChange)=tabSelectionChanged($event)>
   <mat-tab label="Teams"></mat-tab>
   <mat-tab label="Statistic"></mat-tab>
   <mat-tab label="Game Overview"></mat-tab>
