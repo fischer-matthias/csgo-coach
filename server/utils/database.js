@@ -36,7 +36,7 @@ module.exports = function () {
 
     database.getTeams = function(_uid) {
 
-        var query = {players: {uid: _uid}};
+        const query = {players: {uid: _uid}};
         return new Promise( (resolve, reject) => {
             mongodbConnection.collection('Teams').find(query)
             .toArray(function(err, result) {
@@ -51,14 +51,51 @@ module.exports = function () {
         });
     }
 
+    database.getTeam = function(_uid, _name) {
+        const query = {name: _name, players: {uid: _uid}};
+        return new Promise( (resolve, reject) => {
+            mongodbConnection.collection('Teams').findOne(query, function(err, doc) {
+                if(err) {
+                    reject(err);
+                } else {
+                    resolve(doc);
+                }
+            });
+        });
+    }
+
     database.createTeam = function(team) {
         return new Promise((resolve, reject) => {
-            mongodbConnection.collection('Teams').insertOne(team, function(err, res) {
-                if (err) throw err;
-                logger.log('Team ' + team.name + ' was created successful.');
-                resolve();
+
+            const query = {name: team.name};
+
+            mongodbConnection.collection('Teams').find(query).toArray(function(err, result) { 
+                if(result.length > 0) {
+                    reject('Team ' + team.name + ' is already existing.');
+                } else {
+                    mongodbConnection.collection('Teams').insertOne(team, function(err, res) {
+                        if (err) throw err;
+                        logger.log('Team ' + team.name + ' was created successful.');
+                        resolve();
+                    });
+                }
             });
-        })
+        });
+    }
+
+    database.updateTeam = function(team) {
+        return new Promise((resolve, reject) => {
+
+            const query = {_id: team._id};
+
+            mongodbConnection.collection('Teams').replaceOne(query, team, function(error, res) {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(true);
+                }
+            });
+        });
     }
 
     return database;

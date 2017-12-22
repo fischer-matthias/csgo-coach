@@ -16,6 +16,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 import { SocketService } from './services/socket.service';
 import { LoggerService } from './services/logger.service';
@@ -33,14 +34,18 @@ import { PlayerComponent } from './game-overview/player/player.component';
 import { TeamListComponent } from './teams/team-list/team-list.component';
 import { TeamService } from './teams/team.service';
 import { TeamEditComponent } from './teams/team-edit/team-edit.component';
+import { TeamOverviewComponent } from './teams/team-overview/team-overview.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
     CsgoCoachComponent,
-    GameOverviewComponent,
+
     TeamListComponent,
     TeamEditComponent,
+    TeamOverviewComponent,
+
+    GameOverviewComponent,
     PlayerComponent
   ],
   imports: [
@@ -58,7 +63,8 @@ import { TeamEditComponent } from './teams/team-edit/team-edit.component';
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
-    MatGridListModule
+    MatGridListModule,
+    MatIconModule
   ],
   providers: [
     LoggerService,

@@ -1,22 +1,24 @@
 <mat-card class="team-edit-card">
-    <mat-card-title>Create a Team:</mat-card-title>
+  <mat-card-title *ngIf="!editMode">Create a Team:</mat-card-title>
+  <mat-card-title *ngIf="editMode">Edit {{team?.name}}</mat-card-title>
 
-    <div class="team-edit-container">
-        <mat-form-field>
-            <input matInput name="tname" type="text" placeholder="Name" [(ngModel)]="name" />
-        </mat-form-field>
+  <div class="team-edit-container">
+    <mat-form-field>
+      <input *ngIf="!editMode" matInput name="tname" type="text" placeholder="Name" [(ngModel)]="team.name" />
+      <input *ngIf="editMode" matInput disabled name="tname" type="text" placeholder="Name" [(ngModel)]="team.name" />
+    </mat-form-field>
 
-        <mat-form-field>
-            <textarea matInput name="tdesc" type="text" placeholder="Description" [(ngModel)]="desc"></textarea>
-        </mat-form-field>
+    <mat-form-field>
+      <textarea matInput name="tdesc" type="text" placeholder="Description" [(ngModel)]="team.desc"></textarea>
+    </mat-form-field>
 
-        <mat-form-field>
-          <input matInput name="tactivateCode" type="text" placeholder="Activate code" [(ngModel)]="activateCode" />
-      </mat-form-field>
-    </div>
+    <mat-form-field>
+      <input matInput name="tactivateCode" type="text" placeholder="Activate code" [(ngModel)]="team.activateCode" />
+    </mat-form-field>
+  </div>
 
-    <mat-card-actions>
-        <button mat-raised-button color="secondary" (click)="navigateBack()">Cancel</button>
-        <button mat-raised-button color="primary" (click)="saveTeam()">Save</button>
-    </mat-card-actions>
+  <mat-card-actions>
+    <button mat-raised-button color="secondary" (click)="navigateBack()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="saveTeam()">Save</button>
+  </mat-card-actions>
 </mat-card>

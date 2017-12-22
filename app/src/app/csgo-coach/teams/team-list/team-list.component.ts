@@ -31,4 +31,12 @@ export class TeamListComponent implements OnInit {
   public createTeam(): void {
     this.router.navigate(['/teams/team-edit']);
   }
+
+  public navigateToOverview(name: string): void {
+    this.router.navigate(['/teams/team-overview', name]);
+  }
+
+  public navigateToEdit(name: string): void {
+    this.router.navigate(['/teams/team-edit', name]);
+  }
 }
