@@ -1,5 +1,5 @@
 export class Team {
   name: string;
-  members: string[];
+  players: string[];
   activateCode: string;
 }

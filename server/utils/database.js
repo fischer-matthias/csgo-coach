@@ -34,12 +34,31 @@ module.exports = function () {
           });
     }
 
-    database.getTeams = function(uid) {
-        mongodbConnection.collection('Teams').find({"players.uid": uid})
+    database.getTeams = function(_uid) {
+
+        var query = {players: {uid: _uid}};
+        return new Promise( (resolve, reject) => {
+            mongodbConnection.collection('Teams').find(query)
             .toArray(function(err, result) {
-                if(err) throw err;
-                return result;
-            })
+
+                if(err) {
+                    throw err;
+                    reject(err);
+                }
+
+                resolve(result);
+            });
+        });
+    }
+
+    database.createTeam = function(team) {
+        return new Promise((resolve, reject) => {
+            mongodbConnection.collection('Teams').insertOne(team, function(err, res) {
+                if (err) throw err;
+                logger.log('Team ' + team.name + ' was created successful.');
+                resolve();
+            });
+        })
     }
 
     return database;

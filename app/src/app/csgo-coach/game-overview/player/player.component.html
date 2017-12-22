@@ -1,11 +1,11 @@
-<mat-grid-list cols="6" rowHeight="40px">
+<mat-grid-list cols="6" rowHeight="40px" *ngIf="player && player.match_stats">
   <mat-grid-tile>
     <img style="border-radius: 15px;" src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/07/0791da2319ec91d38946a3a816550a36ec508f28.jpg">
   </mat-grid-tile>
   <mat-grid-tile [colspan]="5">
     <div>
       <p style="margin:0; padding:0; font-weight:bold">{{player?.name}}</p>
-      <p style="margin:0; padding:0;" *ngIf="player.match_stats">
+      <p style="margin:0; padding:0;" *ngIf="player && player.match_stats">
         <span> K {{player?.match_stats?.kills}} / A {{player?.match_stats?.assists}} / D {{player?.match_stats?.deaths}} </span>
       </p>
     </div>

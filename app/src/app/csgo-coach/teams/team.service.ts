@@ -11,7 +11,7 @@ export class TeamService {
 
   getMyTeams(uid: string): Observable<Team[]> {
     return this.http.get('/api/teams')
-            .map((response: any) => response as Team[]);
+            .map((response: any) => response.teams as Team[]);
   }
 
   createTeam(team: Team): Observable<boolean> {

@@ -1,21 +1,28 @@
-<mat-card class="game-overview-card">
+<div *ngIf="mapInfo">
+  <mat-card class="game-overview-card">
 
-  <img *ngIf="mapInfo" class="map-image" src="assets/images/maps/{{mapInfo?.name}}.jpg">
+    <img *ngIf="mapInfo" class="map-image" src="assets/images/maps/{{mapInfo?.name}}.jpg">
 
-  <mat-grid-list cols="3">
-    <mat-grid-tile>
-      <img src="assets/images/team_ct.png" class="team-symbol" />
-    </mat-grid-tile>
-    <mat-grid-tile>{{mapInfo?.team_ct.score}} - {{mapInfo?.team_t.score}}</mat-grid-tile>
-    <mat-grid-tile>
-      <img src="assets/images/team_t.png" class="team-symbol" />
-    </mat-grid-tile>
-  </mat-grid-list>
+    <mat-grid-list cols="3">
+      <mat-grid-tile>
+        <img src="assets/images/team_ct.png" class="team-symbol" />
+      </mat-grid-tile>
+      <mat-grid-tile>{{mapInfo?.team_ct.score}} - {{mapInfo?.team_t.score}}</mat-grid-tile>
+      <mat-grid-tile>
+        <img src="assets/images/team_t.png" class="team-symbol" />
+      </mat-grid-tile>
+    </mat-grid-list>
 
 
-</mat-card>
+  </mat-card>
 
-<mat-card class="game-overview-card">
-  <mat-card-title>Team-Members</mat-card-title>
-  <app-player [player]="player"></app-player>
-</mat-card>
+  <mat-card class="game-overview-card">
+    <mat-card-title>Team-Members</mat-card-title>
+    <app-player [player]="player"></app-player>
+  </mat-card>
+
+</div>
+
+<div *ngIf="!mapInfo">
+  <h3>No active game.</h3>
+</div>

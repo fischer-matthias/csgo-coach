@@ -10,13 +10,7 @@ module.exports = function () {
 
     var webServer = {};
     webServer.database = require('../utils/database')();
-    webServer.static = require('./routes/static')();
-
     webServer.webSocket = require('./webSocket')(http);
-    webServer.csgo = require('./routes/csgo')(webServer.webSocket);
-
-    webServer.steamAuth = require('./steamAuth')(webServer.database);
-    webServer.api = require('./routes/api')(webServer.database);
 
     webServer.init = function () {
 
@@ -50,10 +44,12 @@ module.exports = function () {
     }
 
     function registerRoutes() {
-        app.use('/', webServer.static.routes);
-        app.use('/api/', webServer.api.routes);
-        app.use('/steam/', webServer.steamAuth.routes);
-        app.use('/csgo/', webServer.csgo.routes);
+        app.use('/', require('./routes/static')().routes);
+        app.use('/steam/', require('./steamAuth')(webServer.database).routes);
+        app.use('/csgo/', require('./routes/csgo')(webServer.webSocket).routes);
+
+        // api
+        app.use('/api/teams/', require('./routes/team')(webServer.database).routes);
     }
 
     function listen() {
