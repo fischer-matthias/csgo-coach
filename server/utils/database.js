@@ -14,85 +14,75 @@ module.exports = function () {
         mongodbConnection = db.db(config.MONGODB_NAME);
     });
 
-    database.addUser = function(uid) {
-
-        var user = {
-            uid: uid,
-            role: 'user'
-        };
-
-        mongodbConnection.collection("User").find(user).toArray(function(err, result) {
-            if(err) throw err;
-            if(result.length > 0) {
-                logger.log("User " + user.uid + " logged in.");
-            } else {
-                mongodbConnection.collection("User").insertOne(user, function(err, res) {
-                    if (err) throw err;
-                    logger.log("User " + user.uid + " was created.");
-                });
-            }
-          });
-    }
-
-    database.getTeams = function(_uid) {
-
-        const query = {players: {uid: _uid}};
-        return new Promise( (resolve, reject) => {
-            mongodbConnection.collection('Teams').find(query)
-            .toArray(function(err, result) {
-
-                if(err) {
-                    throw err;
-                    reject(err);
-                }
-
-                resolve(result);
-            });
-        });
-    }
-
-    database.getTeam = function(_uid, _name) {
-        const query = {name: _name, players: {uid: _uid}};
-        return new Promise( (resolve, reject) => {
-            mongodbConnection.collection('Teams').findOne(query, function(err, doc) {
-                if(err) {
-                    reject(err);
-                } else {
-                    resolve(doc);
-                }
-            });
-        });
-    }
-
-    database.createTeam = function(team) {
+    /**
+     * Creates a new object in the database
+     * @param {*} collection 
+     * @param {*} document 
+     */
+    database.create = function(collection, document) {
         return new Promise((resolve, reject) => {
-
-            const query = {name: team.name};
-
-            mongodbConnection.collection('Teams').find(query).toArray(function(err, result) { 
-                if(result.length > 0) {
-                    reject('Team ' + team.name + ' is already existing.');
-                } else {
-                    mongodbConnection.collection('Teams').insertOne(team, function(err, res) {
-                        if (err) throw err;
-                        logger.log('Team ' + team.name + ' was created successful.');
-                        resolve();
-                    });
-                }
-            });
-        });
-    }
-
-    database.updateTeam = function(team) {
-        return new Promise((resolve, reject) => {
-
-            const query = {_id: team._id};
-
-            mongodbConnection.collection('Teams').replaceOne(query, team, function(error, res) {
-                if (error) {
+            mongodbConnection.collection(collection).insertOne(document, (error, result) => {
+                if(error) {
+                    logger.log(error);
                     reject(error);
                 } else {
                     resolve(true);
+                }
+            });
+        });
+    }
+
+    /**
+     * Updates a specific document.
+     * @param {*} collection 
+     * @param {*} document 
+     * @param {*} query 
+     */
+    database.update = function(collection, document, query) {
+        return new Promise((resolve, reject) => {
+            mongodbConnection.collection(collection).replaceOne(query, document, (error, result) => {
+                if(error) {
+                    logger.log(error);
+                    reject(error);
+                } else {
+                    // todo: What happens if none document was updated?
+                    resolve(true);
+                }
+            });
+        });
+    }
+
+    /**
+     * Returns all documents of a collection that match a given query.
+     * @param {*} collection 
+     * @param {*} query 
+     */
+    database.getAll = function(collection, query) {
+        return new Promise((resolve, reject) => {
+            mongodbConnection.collection(collection).find(query).toArray((error, result) => {
+                if(error) {
+                    logger.log(error);
+                    reject(error);
+                } else {
+                    resolve(result);    
+                }
+            });
+        });
+    }
+
+    /**
+     * Returns one specific document of a collection.
+     * @param {*} collection 
+     * @param {*} query 
+     */
+    database.getOne = function(collection, query) {
+        return new Promise((resolve, reject) => {
+            mongodbConnection.collection(collection).findOne(query, (error, result) => {
+                if(error) {
+                    logger.log(error);
+                    reject(error);
+                } else {
+                    resolve(result);    
                 }
             });
         });

@@ -1,64 +1,88 @@
 module.exports = function(database) {
   const logger = require('../../utils/logger')();
+  const collection = 'Team';
   const team = {};
 
-  team.getMyTeams = function(uid) {
-    try {
-      return database.getTeams(uid);
-    } catch (err) {
-      logger.log(err);
-    }
-  };
-
-  team.getTeam = function(uid, name) {
-    try {
-      return database.getTeam(uid, name);
-    } catch (err) {
-      logger.log(err);
-    }
-  };
-
-  team.createTeam = function(uid, team) {
-    try {
-      team.admin = uid;
-      team.players = [];
-      team.players.push({ uid: uid });
-      return database.createTeam(team);
-    } catch (err) {
-      logger.log(err);
-    }
-  };
-
-  team.updateTeam = function(_uid, _team) {
-    try {
-      return new Promise((resolve, reject) => {
-        database.getTeam(_uid, _team.name)
-        .then(team => {
-          if (team.admin != _uid) {
-            reject('Permission denied.');
-          } else {
-
-            team.name = _team.name;
-            team.desc = _team.desc;
-            team.activateCode = _team.activateCode;
-
-            database
-              .updateTeam(team)
-              .then(result => {
-                resolve(result);
-              })
-              .catch(err => {
-                reject(err);
-              });
-          }
+  /**
+   * Returns all teams that includes a specific player.
+   * @param {*} _uid
+   */
+  team.getMyTeams = function(_uid) {
+    return new Promise((resolve, reject) => {
+      const query = { players: { uid: _uid } };
+      database
+        .getAll(collection, query)
+        .then(result => {
+          result.forEach(element => {
+            if (element.admin != _uid) {
+              element.activateCode = null;
+            }
+          });
+          resolve(result);
         })
-        .catch(err => {
-          reject(err);
-        });
-      });
-    } catch (err) {
-      logger.log(err);
-    }
+        .catch(error => reject(error));
+    });
+  };
+
+  /**
+   * Returns a specific team.
+   * @param {*} _uid
+   * @param {*} _name
+   */
+  team.getTeam = function(_uid, _name) {
+    return new Promise((resolve, reject) => {
+      const query = { name: _name, players: { uid: _uid } };
+      database
+        .getOne(collection, query)
+        .then(result => {
+          if (result.admin != _uid) {
+            result.activateCode = null;
+          }
+          resolve(result);
+        })
+        .catch(error => reject(error));
+    });
+  };
+
+  /**
+   * Creates a new team.
+   * @param {*} _uid
+   * @param {*} _team
+   */
+  team.createTeam = function(_uid, _team) {
+    return new Promise((resolve, reject) => {
+      _team.admin = _uid;
+      _team.players = [];
+      _team.players.push({ uid: _uid });
+      database
+        .create(collection, _team)
+        .then(result => {
+          resolve(result);
+        })
+        .catch(error => reject(error));
+    });
+  };
+
+  /**
+   * Updates a specific team.
+   * @param {*} _uid
+   * @param {*} _team
+   */
+  team.updateTeam = function(_uid, _team) {
+    return new Promise((resolve, reject) => {
+      const query = { admin: _uid, name: _team.name };
+      database
+        .getOne(collection, query)
+        .then(result => {
+          result.desc = _team.desc;
+          result.activateCode = _team.activateCode;
+          database
+            .update(collection, result, query)
+            .then(_result => resolve(_result))
+            .catch(error => reject(error));
+        })
+        .catch(error => reject(error));
+    });
   };
 
   return team;

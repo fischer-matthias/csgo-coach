@@ -13,7 +13,7 @@ export class SteamAuthService {
 
   private getUserStatus(): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      this.httpClient.get('/steam/status').subscribe((status) => {
+      this.httpClient.get('/api/steam/status').subscribe((status) => {
 
         if (status === null || status['user'] === null) {
           this.loggedIn = false;

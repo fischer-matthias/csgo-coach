@@ -3,6 +3,8 @@ module.exports = function(database) {
     const express = require('express');
     const steam = require('steam-login');
     const bodyParser  = require('body-parser');
+    const userModel = require('../models/user')(database);
+    const logger = require('../../utils/logger')();
 
     const steamAuth = {};
     steamAuth.routes = express.Router();
@@ -17,9 +19,18 @@ module.exports = function(database) {
 
     steamAuth.routes.route('/verify').get(steam.verify(), function(req, res) {
         if(req.user) {
-            database.addUser(req.user._json.steamid);
+            const uid = req.user._json.steamid;
+
+            userModel.verify(uid)
+                .then(result => {
+                    res.redirect('/');
+                })
+                .catch(error => {
+                    // lol
+                    res.redirect('/');
+                });
         }
-        res.redirect('/');
+        
     });
 
     steamAuth.routes.route('/status').get(function(req, res) {
