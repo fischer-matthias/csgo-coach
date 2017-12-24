@@ -35,6 +35,7 @@ import { TeamListComponent } from './teams/team-list/team-list.component';
 import { TeamService } from './teams/team.service';
 import { TeamEditComponent } from './teams/team-edit/team-edit.component';
 import { TeamOverviewComponent } from './teams/team-overview/team-overview.component';
+import { TeamJoinComponent } from './teams/team-join/team-join.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { TeamOverviewComponent } from './teams/team-overview/team-overview.compo
     TeamListComponent,
     TeamEditComponent,
     TeamOverviewComponent,
+    TeamJoinComponent,
 
     GameOverviewComponent,
     PlayerComponent

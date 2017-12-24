@@ -26,7 +26,9 @@ export class TeamListComponent implements OnInit {
       });
   }
 
-  public joinTeam(): void {}
+  public joinTeam(): void {
+    this.router.navigate(['/teams/join']);
+  }
 
   public createTeam(): void {
     this.router.navigate(['/teams/team-edit']);

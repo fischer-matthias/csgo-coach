@@ -28,4 +28,9 @@ export class TeamService {
     return this.http.put('/api/teams', team)
             .map((response: any) => response.ok);
   }
+
+  joinTeam(teamName: string, activationCode: string): Observable<boolean> {
+    return this.http.post('/api/teams/join', {name: teamName, activateCode: activationCode})
+            .map((response: any) => response.ok);
+  }
 }

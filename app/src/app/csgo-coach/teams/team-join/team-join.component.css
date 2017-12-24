@@ -1,0 +1,8 @@
+.team-join-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.team-join-container > * {
+  width: 100%;
+}

@@ -1,0 +1,17 @@
+<mat-card class="csgo-card">
+  <mat-card-title>Join a team</mat-card-title>
+
+  <div class="team-join-container">
+    <mat-form-field>
+      <input matInput [(ngModel)]="teamName" placeholder="Team" name="tName" />
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="activationCode" placeholder="Activate code" name="tCode" />
+    </mat-form-field>
+  </div>
+
+  <mat-card-actions>
+    <button mat-raised-button color="secondary" (click)="navigateBack()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="joinTeam()">Join</button>
+  </mat-card-actions>
+</mat-card>
