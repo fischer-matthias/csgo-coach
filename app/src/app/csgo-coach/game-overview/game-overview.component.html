@@ -1,5 +1,5 @@
 <div *ngIf="mapInfo">
-  <mat-card class="game-overview-card">
+  <mat-card class="csgo-card">
 
     <img *ngIf="mapInfo" class="map-image" src="assets/images/maps/{{mapInfo?.name}}.jpg">
 
@@ -16,7 +16,7 @@
 
   </mat-card>
 
-  <mat-card class="game-overview-card">
+  <mat-card class="csgo-card">
     <mat-card-title>Team-Members</mat-card-title>
     <app-player [player]="player"></app-player>
   </mat-card>
