@@ -1,13 +1,4 @@
 <mat-card class="csgo-card">
-  <mat-grid-list cols="2" rowHeight="75px">
-    <mat-grid-tile>
-      <button mat-raised-button color="primary" (click)="joinTeam()">Join team</button>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <button mat-raised-button color="secondary" (click)="createTeam()">Create team</button>
-    </mat-grid-tile>
-  </mat-grid-list>
-
   <mat-list>
     <mat-list-item *ngFor="let team of teams">
       <h3 matLine>{{team?.name}}</h3>
@@ -19,4 +10,13 @@
       </button>
     </mat-list-item>
   </mat-list>
+
+  <mat-grid-list cols="2" rowHeight="75px">
+      <mat-grid-tile>
+        <button mat-raised-button color="primary" (click)="joinTeam()">Join team</button>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <button mat-raised-button color="primary" (click)="createTeam()">Create team</button>
+      </mat-grid-tile>
+    </mat-grid-list>
 </mat-card>

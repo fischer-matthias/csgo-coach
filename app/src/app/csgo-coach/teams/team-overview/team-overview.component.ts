@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Team } from '../team';
 import { TeamService } from '../team.service';
 
@@ -14,7 +14,7 @@ export class TeamOverviewComponent implements OnInit {
   private name: string;
   public team: Team;
 
-  constructor(private route: ActivatedRoute, private teamService: TeamService) {
+  constructor(private router: Router, private route: ActivatedRoute, private teamService: TeamService) {
     this.route.params.subscribe(params => {
       this.name = params['name'];
       this.loadTeam();
@@ -27,5 +27,9 @@ export class TeamOverviewComponent implements OnInit {
     this.teamService.getTeam(this.name).subscribe(result => {
       this.team = result;
     });
+  }
+
+  public navigateBack(): void {
+    this.router.navigate(['/teams/team-list']);
   }
 }
