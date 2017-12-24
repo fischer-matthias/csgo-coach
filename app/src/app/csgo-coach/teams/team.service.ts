@@ -21,16 +21,16 @@ export class TeamService {
 
   setTeam(team: Team): Observable<boolean> {
     return this.http.post('/api/teams/' + team.name, team)
-            .map((response: any) => response.ok);
+            .map((response: any) => response.status === 'ok');
   }
 
   createTeam(team: Team): Observable<boolean> {
     return this.http.put('/api/teams', team)
-            .map((response: any) => response.ok);
+            .map((response: any) => response.status === 'ok');
   }
 
   joinTeam(teamName: string, activationCode: string): Observable<boolean> {
-    return this.http.post('/api/teams/join', {name: teamName, activateCode: activationCode})
-            .map((response: any) => response.ok);
+    return this.http.post('/api/teams/join/' + teamName, {activateCode: activationCode})
+            .map((response: any) => response.status === 'ok');
   }
 }

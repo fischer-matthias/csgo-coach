@@ -85,5 +85,32 @@ module.exports = function(database) {
     });
   };
 
+  /**
+   * Join a specific team.
+   * @param {*} _uid
+   * @param {*} _name
+   * @param {*} _activateCode
+   */
+  team.joinTeam = function(_uid, _name, _activateCode) {
+    return new Promise((resolve, reject) => {
+      const teamQuery = { name: _name };
+      database.getOne(collection, teamQuery).then(result => {
+        if (result) {
+          if (result.activateCode == _activateCode) {
+            result.players.push({ uid: _uid });
+            database
+              .update(collection, result, teamQuery)
+              .then(result => resolve(result))
+              .catch(error => reject(error));
+          } else {
+            reject('Activation code is wrong.');
+          }
+        } else {
+          reject('Team not available.');
+        }
+      });
+    });
+  };
+
   return team;
 };

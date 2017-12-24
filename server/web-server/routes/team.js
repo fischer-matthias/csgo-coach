@@ -66,5 +66,24 @@ module.exports = function(database) {
       .catch(error => res.status(406).send({ status: 'nok', error: error }));
   });
 
+  /**
+   * Join a team
+   */
+  team.routes.route('/join/:name').post(function(req, res) {
+    const joinReq = req.body;
+    const name = req.params.name;
+
+    if (name && joinReq.activateCode) {
+      joinReq.uid = req.user._json.steamid;
+
+      teamModel
+        .joinTeam(joinReq.uid, name, joinReq.activateCode)
+        .then(result => res.status(200).send({ status: 'ok' }))
+        .catch(_error => res.status(406).send({ status: 'nok', error: _error }));
+    } else {
+      res.status(406).send({ status: 'nok', error: 'Parameter not filled.' });
+    }
+  });
+
   return team;
 };

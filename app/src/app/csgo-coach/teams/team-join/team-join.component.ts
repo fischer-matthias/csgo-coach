@@ -16,9 +16,12 @@ export class TeamJoinComponent implements OnInit {
   public ngOnInit() {}
 
   public joinTeam(): void {
-    this.teamService.joinTeam(this.teamName, this.activationCode)
+    this.teamService
+      .joinTeam(this.teamName, this.activationCode)
       .subscribe((result: boolean) => {
-        console.log('hurrray');
+        if (result) {
+          this.router.navigate(['/teams/team-list']);
+        }
       });
   }
 
