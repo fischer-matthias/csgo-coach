@@ -1,11 +1,10 @@
 <mat-card class="csgo-card">
-  <mat-card-title *ngIf="!editMode">Create a Team:</mat-card-title>
+  <mat-card-title *ngIf="!editMode">New team</mat-card-title>
   <mat-card-title *ngIf="editMode">Edit {{team?.name}}</mat-card-title>
 
   <div class="team-edit-container">
-    <mat-form-field>
-      <input *ngIf="!editMode" matInput name="tname" type="text" placeholder="Name" [(ngModel)]="team.name" />
-      <input *ngIf="editMode" matInput disabled name="tname" type="text" placeholder="Name" [(ngModel)]="team.name" />
+    <mat-form-field *ngIf="!editMode">
+      <input matInput name="tname" type="text" placeholder="Name" [(ngModel)]="team.name" />
     </mat-form-field>
 
     <mat-form-field>

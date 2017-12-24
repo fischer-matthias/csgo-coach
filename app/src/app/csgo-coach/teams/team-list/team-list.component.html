@@ -1,22 +1,23 @@
 <mat-card class="csgo-card">
+  <mat-card-title>Your teams</mat-card-title>
   <mat-list>
     <mat-list-item *ngFor="let team of teams">
-      <h3 matLine>{{team?.name}}</h3>
-      <button mat-mini-fab color="primary" (click)="navigateToOverview(team.name)">
-        O
-      </button>
-      <button *ngIf="team?.activateCode" mat-mini-fab color="primary" (click)="navigateToEdit(team.name)">
+      <h1 matLine>{{team?.name}}</h1>
+      <button *ngIf="team?.activateCode" mat-mini-fab color="primary" class="control-button" (click)="navigateToEdit(team.name)">
         E
+      </button>
+      <button mat-mini-fab color="primary" class="control-button" (click)="navigateToOverview(team.name)">
+        O
       </button>
     </mat-list-item>
   </mat-list>
 
   <mat-grid-list cols="2" rowHeight="75px">
-      <mat-grid-tile>
-        <button mat-raised-button color="primary" (click)="joinTeam()">Join team</button>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <button mat-raised-button color="primary" (click)="createTeam()">Create team</button>
-      </mat-grid-tile>
-    </mat-grid-list>
+    <mat-grid-tile>
+      <button mat-raised-button color="primary" (click)="joinTeam()">Join team</button>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <button mat-raised-button color="primary" (click)="createTeam()">Create team</button>
+    </mat-grid-tile>
+  </mat-grid-list>
 </mat-card>

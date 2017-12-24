@@ -1,11 +1,10 @@
 <mat-toolbar color="primary">
   <span>CSGO Coach</span>
 
-  <!-- This fills the remaining space of the current row -->
   <span class="fill-remaining-space"></span>
 
-  <form *ngIf="loggedIn" action="/steam/logout">
-    <button mat-button>Logout</button>
+  <form *ngIf="loggedIn" action="/api/steam/logout">
+    <button mat-button type="submit">Logout</button>
   </form>
 </mat-toolbar>
 
