@@ -20,7 +20,7 @@ module.exports = function(database) {
           });
           resolve(result);
         })
-        .catch(error => reject(error));
+        .catch(error => reject({'status': 'nok', 'error': error}));
     });
   };
 
@@ -40,7 +40,7 @@ module.exports = function(database) {
           }
           resolve(result);
         })
-        .catch(error => reject(error));
+        .catch(error => reject({'status': 'nok', 'error': error}));
     });
   };
 
@@ -59,7 +59,7 @@ module.exports = function(database) {
         .then(result => {
           resolve(result);
         })
-        .catch(error => reject(error));
+        .catch(error => reject({'status': 'nok', 'error': error}));
     });
   };
 
@@ -79,9 +79,9 @@ module.exports = function(database) {
           database
             .update(collection, result, query)
             .then(_result => resolve(_result))
-            .catch(error => reject(error));
+            .catch(error => reject({'status': 'nok', 'error': error}));
         })
-        .catch(error => reject(error));
+        .catch(error => reject({'status': 'nok', 'error': error}));
     });
   };
 
@@ -101,12 +101,12 @@ module.exports = function(database) {
             database
               .update(collection, result, teamQuery)
               .then(result => resolve(result))
-              .catch(error => reject(error));
+              .catch(error => reject({'status': 'nok', 'error': error}));
           } else {
-            reject('Activation code is wrong.');
+            reject({status: 'nok', error: 'Activation code is wrong.'});
           }
         } else {
-          reject('Team not available.');
+          reject({status: 'nok', error: 'Team not available.'});
         }
       });
     });

@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
-import { LoggerService } from './logger.service';
+import { LoggerService } from '../services/logger.service';
 import { Player } from '../models/player';
 
 @Injectable()
-export class SocketService {
+export class GameOverviewService {
   private behaviorMapSubject: BehaviorSubject<any>;
   private behaviorPlayerSubject: BehaviorSubject<any>;
 

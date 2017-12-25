@@ -18,7 +18,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 
-import { SocketService } from './services/socket.service';
 import { LoggerService } from './services/logger.service';
 import { SteamAuthService } from './services/steam-auth.service';
 import { SteamAuthGuard } from './services/steam-auth.guard';
@@ -36,6 +35,7 @@ import { TeamService } from './teams/team.service';
 import { TeamEditComponent } from './teams/team-edit/team-edit.component';
 import { TeamOverviewComponent } from './teams/team-overview/team-overview.component';
 import { TeamJoinComponent } from './teams/team-join/team-join.component';
+import { GameOverviewService } from './game-overview/game-overview.service';
 
 @NgModule({
   declarations: [
@@ -72,7 +72,7 @@ import { TeamJoinComponent } from './teams/team-join/team-join.component';
     LoggerService,
     SteamAuthService,
     SteamAuthGuard,
-    SocketService,
+    GameOverviewService,
     SteamUserService,
     TeamService
   ],

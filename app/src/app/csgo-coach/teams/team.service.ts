@@ -9,7 +9,7 @@ import { Team } from './team';
 export class TeamService {
   constructor(private http: HttpClient) { }
 
-  getMyTeams(uid: string): Observable<Team[]> {
+  getMyTeams(): Observable<Team[]> {
     return this.http.get('/api/teams')
             .map((response: any) => response.teams as Team[]);
   }

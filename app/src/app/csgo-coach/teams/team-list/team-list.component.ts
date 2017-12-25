@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Team } from '../team';
 import { TeamService } from '../team.service';
-import { SteamAuthService } from '../../services/steam-auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,14 +12,13 @@ export class TeamListComponent implements OnInit {
   teams: Team[];
 
   constructor(
-    private steamAuth: SteamAuthService,
     private teamService: TeamService,
     private router: Router
   ) {}
 
   public ngOnInit() {
     this.teamService
-      .getMyTeams(this.steamAuth.getUserId())
+      .getMyTeams()
       .subscribe((teams: Team[]) => {
         this.teams = teams;
       });

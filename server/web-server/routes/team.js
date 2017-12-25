@@ -39,7 +39,7 @@ module.exports = function(database) {
     teamModel
       .getTeam(uid, name)
       .then(result => res.status(200).send({ team: result }))
-      .catch(error => res.status(406).send({ status: 'nok', error: error }));
+      .catch(error => res.status(406).send(error));
   });
 
   /**
@@ -51,8 +51,8 @@ module.exports = function(database) {
 
     teamModel
       .updateTeam(uid, team)
-      .then(result => res.status(200).send({ status: 'ok' }))
-      .catch(error => res.status(406).send({ status: 'nok', error: error }));
+      .then(result => res.status(200).send(result))
+      .catch(error => res.status(406).send(error));
   });
 
   /**
@@ -62,8 +62,8 @@ module.exports = function(database) {
     const newTeam = req.body;
     teamModel
       .createTeam(req.user._json.steamid, newTeam)
-      .then(result => res.status(201).send({ status: 'ok' }))
-      .catch(error => res.status(406).send({ status: 'nok', error: error }));
+      .then(result => res.status(201).send(result))
+      .catch(error => res.status(406).send(error));
   });
 
   /**
@@ -78,8 +78,8 @@ module.exports = function(database) {
 
       teamModel
         .joinTeam(joinReq.uid, name, joinReq.activateCode)
-        .then(result => res.status(200).send({ status: 'ok' }))
-        .catch(_error => res.status(406).send({ status: 'nok', error: _error }));
+        .then(_result => res.status(200).send(_result))
+        .catch(_error => res.status(406).send(_error));
     } else {
       res.status(406).send({ status: 'nok', error: 'Parameter not filled.' });
     }
