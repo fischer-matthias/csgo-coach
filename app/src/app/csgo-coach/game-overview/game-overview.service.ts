@@ -4,6 +4,8 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { LoggerService } from '../services/logger.service';
 import { Player } from '../models/player';
+import { HttpClient } from '@angular/common/http';
+import { Team } from '../teams/team';
 
 @Injectable()
 export class GameOverviewService {
@@ -14,11 +16,11 @@ export class GameOverviewService {
   private url = 'http://localhost';
   private port = '4200';
 
-  constructor(public logger: LoggerService) {
+  constructor(public logger: LoggerService, public http: HttpClient) {
     this.logger.log('init SocketService');
 
     this.initBehaviorSubject();
-    this.initSocket();
+    // this.initSocket();
   }
 
   private initBehaviorSubject(): void {
@@ -26,8 +28,15 @@ export class GameOverviewService {
     this.behaviorPlayerSubject = new BehaviorSubject(null);
   }
 
-  private initSocket(): void {
-    this.ioSocket = io.connect(this.url + ':' + this.port);
+  public joinTeamRoom(team: Team): void {
+    this.http.get('/api/game/' + team.name)
+      .subscribe(result => {
+        this.initSocket(result['roomKey']);
+      });
+  }
+
+  private initSocket(roomKey: string): void {
+    this.ioSocket = io.connect(this.url + ':' + this.port + '/' + roomKey);
     this.ioSocket.on('message', data => {
       const dataObject = JSON.parse(data);
 

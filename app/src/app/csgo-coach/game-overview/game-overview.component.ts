@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { SocketService } from '../services/socket.service';
+import { GameOverviewService } from './game-overview.service';
 import { LoggerService } from '../services/logger.service';
 
 import { Player } from '../models/player';
@@ -19,16 +19,16 @@ export class GameOverviewComponent implements OnInit {
 
   constructor(
     private logger: LoggerService,
-    private socketService: SocketService,
+    private gameOverviewService: GameOverviewService,
     private teamService: TeamService
   ) {
     this.logger.log('Start application.');
 
-    this.socketService.getMapObservable().subscribe(data => {
+    this.gameOverviewService.getMapObservable().subscribe(data => {
       this.mapInfo = data;
     });
 
-    this.socketService.getPlayerObservable().subscribe(player => {
+    this.gameOverviewService.getPlayerObservable().subscribe(player => {
       this.player = player;
     });
 
@@ -39,7 +39,7 @@ export class GameOverviewComponent implements OnInit {
 
   ngOnInit() {}
 
-  public startGame(): void {
+  public joinRoom(): void {
 
   }
 }
