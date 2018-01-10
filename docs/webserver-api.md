@@ -16,4 +16,6 @@
 /api/team/          put  <> creates or updates a specific team
 /api/team/:id       get  <> get specific team  
 /api/team/          get  <> get all teams for the specific user
+
+/api/room/:name     get  <> gets a room token to create a socket.io connection
 ```
