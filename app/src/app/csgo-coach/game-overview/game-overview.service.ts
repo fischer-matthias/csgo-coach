@@ -29,9 +29,9 @@ export class GameOverviewService {
   }
 
   public joinTeamRoom(team: Team): void {
-    this.http.get('/api/game/' + team.name)
+    this.http.get('/api/room/' + team.name)
       .subscribe(result => {
-        this.initSocket(result['roomKey']);
+        this.initSocket(result['key']);
       });
   }
 

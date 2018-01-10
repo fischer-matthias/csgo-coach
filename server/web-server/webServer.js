@@ -50,6 +50,7 @@ module.exports = function () {
         app.use('/api/steam/', require('./routes/steam')(webServer.database).routes);
         app.use('/api/csgo/', require('./routes/csgo')(webServer.webSocket).routes);
         app.use('/api/teams/', require('./routes/team')(webServer.database).routes);
+        app.use('/api/room/', require('./routes/room')(webServer.database, webServer.webSocket).routes);
     }
 
     function listen() {

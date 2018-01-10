@@ -15,6 +15,7 @@ import { Team } from '../teams/team';
 export class GameOverviewComponent implements OnInit {
   mapInfo: any;
   player: Player;
+  selectedTeam: Team = null;
   teams: Team[];
 
   constructor(
@@ -40,6 +41,8 @@ export class GameOverviewComponent implements OnInit {
   ngOnInit() {}
 
   public joinRoom(): void {
-
+    if (this.selectedTeam) {
+      this.gameOverviewService.joinTeamRoom(this.selectedTeam);
+    }
   }
 }

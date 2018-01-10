@@ -26,6 +26,7 @@
     "mongodb": "^3.0.0-rc0",
     "path": "^0.12.7",
     "socket.io": "^2.0.4",
-    "steam-login": "^0.1.6"
+    "steam-login": "^0.1.6",
+    "uniqid": "^4.1.1"
   }
 }

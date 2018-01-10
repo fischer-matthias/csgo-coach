@@ -1,7 +1,7 @@
 <mat-card class="csgo-card">
   <mat-card-title>Your teams</mat-card-title>
   <mat-list>
-    <mat-list-item *ngFor="let team of teams">
+    <mat-list-item *ngFor="let team of teams; let i = index" [ngClass]="i % 2 == 1 ? 'second-row' : ''">
       <h1 matLine>{{team?.name}}</h1>
       <button *ngIf="team?.activateCode" mat-mini-fab color="primary" class="control-button" (click)="navigateToEdit(team.name)">
         E

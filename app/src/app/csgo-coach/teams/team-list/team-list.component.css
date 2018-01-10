@@ -1,3 +1,7 @@
 .control-button {
   margin-left: 8px !important;
 }
+
+.second-row {
+  background-color: lightgray;
+}

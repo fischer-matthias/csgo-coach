@@ -28,8 +28,8 @@
     <mat-card-title>No active game ...</mat-card-title>
 
     <mat-form-field>
-      <mat-select placeholder="Teams">
-        <mat-option *ngFor="let team of teams" [value]="team.name">
+      <mat-select placeholder="Teams" [(value)]="selectedTeam">
+        <mat-option *ngFor="let team of teams" [value]="team">
           {{ team.name }}
         </mat-option>
       </mat-select>
