@@ -1,0 +1,159 @@
+{
+  "provider": {
+    "name": "Counter-Strike: Global Offensive",
+    "appid": 730,
+    "version": 13616,
+    "steamid": "76561198035577428",
+    "timestamp": 1512070908
+  },
+  "map": {
+    "mode": "casual",
+    "name": "de_cache",
+    "phase": "live",
+    "round": 11,
+    "team_ct": {
+      "score": 6,
+      "timeouts_remaining": 1,
+      "matches_won_this_series": 0
+    },
+    "team_t": {
+      "score": 5,
+      "name": "Mett-Crew",
+      "timeouts_remaining": 1,
+      "matches_won_this_series": 0
+    },
+    "num_matches_to_win_series": 0,
+    "current_spectators": 0,
+    "souvenirs_total": 0
+  },
+  "round": {
+    "phase": "live",
+    "bomb": "planted"
+  },
+  "player": {
+    "steamid": "76561198035577428",
+    "clan": "M-E-T-T",
+    "name": "L a c h s o",
+    "observer_slot": 1,
+    "team": "T",
+    "activity": "playing",
+    "state": {
+      "health": 100,
+      "armor": 100,
+      "helmet": true,
+      "flashed": 0,
+      "smoked": 0,
+      "burning": 0,
+      "money": 10000,
+      "round_kills": 0,
+      "round_killhs": 0,
+      "equip_value": 1200
+    },
+    "weapons": {
+      "weapon_0": {
+        "name": "weapon_knife_t",
+        "paintkit": "default",
+        "type": "Knife",
+        "state": "holstered"
+      },
+      "weapon_1": {
+        "name": "weapon_glock",
+        "paintkit": "default",
+        "type": "Pistol",
+        "ammo_clip": 20,
+        "ammo_clip_max": 20,
+        "ammo_reserve": 120,
+        "state": "active"
+      }
+    },
+    "match_stats": {
+      "kills": 0,
+      "assists": 0,
+      "deaths": 0,
+      "mvps": 5,
+      "score": 22
+    }
+  },
+  "added": {
+    "round": {
+      "bomb": true
+    }
+  },
+  "auth": {
+    "token": "CCWJu64ZV3JHDT8hZc"
+  }
+}
+{
+  "steamid": "76561198035577428",
+  "clan": "M-E-T-T",
+  "name": "L a c h s o",
+  "observer_slot": 1,
+  "team": "T",
+  "activity": "playing",
+  "state": {
+    "health": 100,
+    "armor": 100,
+    "helmet": true,
+    "flashed": 0,
+    "smoked": 0,
+    "burning": 0,
+    "money": 53050,
+    "round_kills": 0,
+    "round_killhs": 0,
+    "equip_value": 7150
+  },
+  "weapons": {
+    "weapon_0": {
+      "name": "weapon_knife_t",
+      "paintkit": "default",
+      "type": "Knife",
+      "state": "holstered"
+    },
+    "weapon_1": {
+      "name": "weapon_cz75a",
+      "paintkit": "default",
+      "type": "Pistol",
+      "ammo_clip": 12,
+      "ammo_clip_max": 12,
+      "ammo_reserve": 12,
+      "state": "holstered"
+    },
+    "weapon_2": {
+      "name": "weapon_awp",
+      "paintkit": "default",
+      "type": "SniperRifle",
+      "ammo_clip": 10,
+      "ammo_clip_max": 10,
+      "ammo_reserve": 30,
+      "state": "holstered"
+    },
+    "weapon_3": {
+      "name": "weapon_smokegrenade",
+      "paintkit": "default",
+      "type": "Grenade",
+      "ammo_reserve": 1,
+      "state": "holstered"
+    },
+    "weapon_4": {
+      "name": "weapon_flashbang",
+      "paintkit": "default",
+      "type": "Grenade",
+      "ammo_reserve": 1,
+      "state": "holstered"
+    },
+    "weapon_5": {
+      "name": "weapon_molotov",
+      "paintkit": "default",
+      "type": "Grenade",
+      "ammo_reserve": 1,
+      "state": "active"
+    }
+  },
+  "match_stats": {
+    "kills": -1,
+    "assists": 0,
+    "deaths": 1,
+    "mvps": 4,
+    "score": 18
+  }
+}
