@@ -20,6 +20,7 @@ module.exports = function () {
         registerRoutes();
 
         listen();
+        webServer.webSocket.init();
     };
 
     function prepareSessionHandling() {

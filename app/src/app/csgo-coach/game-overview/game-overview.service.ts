@@ -18,9 +18,7 @@ export class GameOverviewService {
 
   constructor(public logger: LoggerService, public http: HttpClient) {
     this.logger.log('init SocketService');
-
     this.initBehaviorSubject();
-    // this.initSocket();
   }
 
   private initBehaviorSubject(): void {
@@ -36,7 +34,13 @@ export class GameOverviewService {
   }
 
   private initSocket(roomKey: string): void {
-    this.ioSocket = io.connect(this.url + ':' + this.port + '/' + roomKey);
+    this.logger.log('Try to join room with key: ' + roomKey);
+
+    this.ioSocket = io.connect(this.url + ':' + this.port);
+    this.ioSocket.on('connect', () => { 
+      this.ioSocket.emit('room', roomKey);
+    });
+
     this.ioSocket.on('message', data => {
       const dataObject = JSON.parse(data);
 

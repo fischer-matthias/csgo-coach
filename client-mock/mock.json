@@ -8,11 +8,11 @@
   },
   "map": {
     "mode": "casual",
-    "name": "de_cache",
+    "name": "de_cbble",
     "phase": "live",
     "round": 11,
     "team_ct": {
-      "score": 6,
+      "score": 7,
       "timeouts_remaining": 1,
       "matches_won_this_series": 0
     },
@@ -64,10 +64,19 @@
         "ammo_clip_max": 20,
         "ammo_reserve": 120,
         "state": "active"
+      },
+      "weapon_2": {
+        "name": "weapon_ak47",
+        "paintkit": "default",
+        "type": "Pistol",
+        "ammo_clip": 20,
+        "ammo_clip_max": 20,
+        "ammo_reserve": 120,
+        "state": "active"
       }
     },
     "match_stats": {
-      "kills": 0,
+      "kills": 1337,
       "assists": 0,
       "deaths": 0,
       "mvps": 5,

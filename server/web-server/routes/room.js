@@ -36,25 +36,25 @@ module.exports = function(database, webSocket) {
                     break;    
                 }
             }
-
-            logger.log(webSocket.rooms);
             
             if(isMemberOfTeam) {
-                logger.log('isMemberOfTeam = true');
                 var currentRoom = null;
                 
+                // room already available?
                 for(var i=0; i < webSocket.rooms.length; i++) {
                     if(webSocket.rooms[i].name == name) {
                         currentRoom = webSocket.rooms[i];
+                        currentRoom.users.push(uid);
                         break;
                     }
                 }
 
+                // if not create the room
                 if(currentRoom == null) {
-                    logger.log(name);
-                    currentRoom = webSocket.createRoom(name);
+                    currentRoom = webSocket.createRoom(name, uid);
                 }
 
+                // feedback
                 if(currentRoom == null) {
                     res.status(406).send({'status': 'nok', 'error': 'Room creation failed!'})
                 } else {
@@ -62,7 +62,6 @@ module.exports = function(database, webSocket) {
                 }
                 
             } else {
-                logger.log('isMemberOfTeam = false');
                 res.status(406).send({'status': 'nok', 'error': 'Not allowed to join the room!'});
             }
         })
