@@ -10,7 +10,7 @@ import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
   styleUrls: ['./csgo-coach.component.css']
 })
 export class CsgoCoachComponent implements OnInit {
-  private routes = ['/teams/team-list', '/statistic', '/game-overview'];
+  private routes = ['/game-overview', '/statistic'];
   public loggedIn = false;
   public index: number;
 

@@ -4,8 +4,7 @@ import { GameOverviewService } from './game-overview.service';
 import { LoggerService } from '../services/logger.service';
 
 import { Player } from '../models/player';
-import { TeamService } from '../teams/team.service';
-import { Team } from '../teams/team';
+import { Lobby } from '../models/lobby';
 
 @Component({
   selector: 'app-game-overview',
@@ -15,13 +14,15 @@ import { Team } from '../teams/team';
 export class GameOverviewComponent implements OnInit {
   mapInfo: any;
   player: Player;
-  selectedTeam: Team = null;
-  teams: Team[];
+
+  lobbyName: string = '';
+  lobbyKey: string = '';
+
+  lobby: Lobby = null;
 
   constructor(
     private logger: LoggerService,
     private gameOverviewService: GameOverviewService,
-    private teamService: TeamService
   ) {
     this.logger.log('Start application.');
 
@@ -32,17 +33,25 @@ export class GameOverviewComponent implements OnInit {
     this.gameOverviewService.getPlayerObservable().subscribe(player => {
       this.player = player;
     });
-
-    this.teamService.getMyTeams().subscribe(teams => {
-      this.teams = teams;
-    });
   }
 
   ngOnInit() {}
 
-  public joinRoom(): void {
-    if (this.selectedTeam) {
-      this.gameOverviewService.joinTeamRoom(this.selectedTeam);
+  public createLobby(): void {
+    if (this.lobbyName != null) {
+      this.gameOverviewService.createLobby(this.lobbyName)
+        .then((lobby) => {
+          this.lobby = lobby;
+        });
+    }
+  }
+
+  public joinLobby(): void {
+    if (this.lobbyKey != null) {
+      this.gameOverviewService.joinLobby(this.lobbyKey)
+        .then((lobby) => {
+          this.lobby = lobby;
+        });
     }
   }
 }

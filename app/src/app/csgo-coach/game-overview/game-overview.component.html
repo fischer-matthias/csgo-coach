@@ -1,4 +1,10 @@
 <div *ngIf="mapInfo">
+
+  <mat-card class="csgo-card">
+    <h4>Lobby: {{lobby?.name}}</h4>
+    <h4>Key: {{lobby?.key}}</h4>
+  </mat-card>
+
   <mat-card class="csgo-card">
 
     <img *ngIf="mapInfo" class="map-image" src="assets/images/maps/{{mapInfo?.name}}.jpg">
@@ -17,23 +23,33 @@
   </mat-card>
 
   <mat-card class="csgo-card">
-    <mat-card-title>Team-Members</mat-card-title>
+    <mat-card-title>Lobby-Members</mat-card-title>
     <app-player [player]="player"></app-player>
   </mat-card>
 
 </div>
 
-<div *ngIf="!mapInfo">
+<div *ngIf="!mapInfo && !lobby">
   <mat-card class="csgo-card">
-    <mat-card-title>No active game ...</mat-card-title>
 
     <mat-form-field>
-      <mat-select placeholder="Teams" [(value)]="selectedTeam">
-        <mat-option *ngFor="let team of teams" [value]="team">
-          {{ team.name }}
-        </mat-option>
-      </mat-select>
+      <input matInput placeholder="Lobby name" [(ngModel)]="lobbyName"/>
     </mat-form-field>
-    <button mat-raised-button color="primary" (click)="joinRoom()">Join Room</button>
+    <button mat-raised-button color="primary" (click)="createLobby()">Create lobby</button>
+
+    <h3>OR</h3>
+
+    <mat-form-field>
+      <input matInput placeholder="Lobby key" [(ngModel)]="lobbyKey"/>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="joinLobby()">Join a lobby</button>
+  </mat-card>
+</div>
+
+<div *ngIf="!mapInfo && lobby">
+  <mat-card class="csgo-card">
+    <mat-card-title>Waiting for game to start ...</mat-card-title>
+    <h4>Lobby: {{lobby?.name}}</h4>
+    <h4>Key: {{lobby?.key}}</h4>
   </mat-card>
 </div>

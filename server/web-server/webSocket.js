@@ -5,7 +5,7 @@ module.exports = function(http) {
     const uniqid   = require('uniqid');
 
     const webSocket = {};
-    webSocket.rooms = new Array();
+    webSocket.lobbies = new Array();
 
     /**
      * Initalize socket.io functions.
@@ -14,10 +14,10 @@ module.exports = function(http) {
         socket.on('connection', (socket) => {
             logger.log('A user connected');
 
-            socket.on('room', (roomKey) => {
-                logger.log('User\'ll try to join a room with the key ' + roomKey + '.');
-                socket.join(roomKey, () => {
-                    logger.log('User joined a room with the key ' + roomKey + '.')
+            socket.on('room', (lobbyKey) => {
+                logger.log('User\'ll try to join a lobby with the key ' + lobbyKey + '.');
+                socket.join(lobbyKey, () => {
+                    logger.log('User joined a lobby with the key ' + lobbyKey + '.')
                 });
             }); 
     
@@ -35,10 +35,10 @@ module.exports = function(http) {
         var steamId = message.provider.steamid;
 
         try {
-            webSocket.rooms.forEach((room) => {
-                if(room.users && room.users.indexOf(steamId) > -1){
-                    logger.log('Emit message to room: ' + room.name);
-                    socket.in(room.key).emit('message', JSON.stringify(message));
+            webSocket.lobbies.forEach((lobby) => {
+                if(lobby.users && lobby.users.indexOf(steamId) > -1){
+                    logger.log('Emit message to lobby: ' + lobby.name);
+                    socket.in(lobby.key).emit('message', JSON.stringify(message));
                     throw BreakException;
                 }
             });
@@ -46,15 +46,37 @@ module.exports = function(http) {
     };
 
     /**
-     * Creates a new room.
-     * @param {string} roomName 
+     * Creates a new lobby.
+     * @param {string} lobbyName 
      */
-    webSocket.createRoom = function(roomName, uid) {
-        const room = {'name': roomName, 'key': uniqid(), 'users': [uid]};
-        logger.log("Room '" + roomName + "' with key '" + room.key + "' created.")
-        webSocket.rooms.push(room);
-        return room;
+    webSocket.createLobby = function(lobbyName, uid) {
+        const lobby = {'name': lobbyName, 'key': uniqid(), 'users': [uid]};
+        logger.log("Lobby '" + lobbyName + "' with key '" + lobby.key + "' created.")
+        webSocket.lobbies.push(lobby);
+        return lobby;
     };
+
+    /**
+     * User joins a lobby
+     * @param {string} lobbyKey 
+     * @param {string} uid 
+     */
+    webSocket.joinLobby = (lobbyKey, uid) => {
+        var retLobby = null;
+
+        try {
+            webSocket.lobbies.forEach((lobby) => {
+                if(lobby.key == lobbyKey) {
+                    lobby.users.push(uid);
+                    retLobby = lobby;
+                    logger.log('User ' + uid + ' joined lobby ' + lobby.name + '.');
+                    throw BreakException;
+                }
+            });
+        } catch(e) {}
+
+        return retLobby;
+    }
 
     return webSocket;
 };
