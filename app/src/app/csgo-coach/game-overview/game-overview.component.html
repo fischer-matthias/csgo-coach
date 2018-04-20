@@ -1,26 +1,33 @@
+<div *ngIf="lobby">
+  <mat-card class="csgo-card">
+    
+    <mat-form-field>
+      <input matInput placeholder="Lobby name:" [value]="lobby?.name" disabled/>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Lobby key:" [value]="lobby?.key" disabled/>
+    </mat-form-field>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="leaveLobby()">Leave lobby</button>
+    </mat-card-actions>
+  </mat-card>  
+</div>
+
 <div *ngIf="mapInfo">
-
   <mat-card class="csgo-card">
-    <h4>Lobby: {{lobby?.name}}</h4>
-    <h4>Key: {{lobby?.key}}</h4>
-    <button mat-raised-button color="primary" (click)="leaveLobby()">Leave lobby</button>
-  </mat-card>
-
-  <mat-card class="csgo-card">
-
-    <img *ngIf="mapInfo" class="map-image" src="assets/images/maps/{{mapInfo?.name}}.jpg">
-
-    <mat-grid-list cols="3">
+    <mat-grid-list cols="5">
       <mat-grid-tile>
         <img src="assets/images/team_ct.png" class="team-symbol" />
       </mat-grid-tile>
-      <mat-grid-tile>{{mapInfo?.team_ct.score}} - {{mapInfo?.team_t.score}}</mat-grid-tile>
+      <mat-grid-tile>{{mapInfo?.team_ct.score}}</mat-grid-tile>
+      <mat-grid-tile><img *ngIf="mapInfo" class="map-image" src="assets/images/maps/{{mapInfo?.name}}.jpg"></mat-grid-tile>
+      <mat-grid-tile>{{mapInfo?.team_t.score}}</mat-grid-tile>
       <mat-grid-tile>
         <img src="assets/images/team_t.png" class="team-symbol" />
       </mat-grid-tile>
     </mat-grid-list>
-
-
   </mat-card>
 
   <mat-card class="csgo-card">
@@ -44,14 +51,5 @@
       <input matInput placeholder="Lobby key" [(ngModel)]="lobbyKey"/>
     </mat-form-field>
     <button mat-raised-button color="primary" (click)="joinLobby()">Join a lobby</button>
-  </mat-card>
-</div>
-
-<div *ngIf="!mapInfo && lobby">
-  <mat-card class="csgo-card">
-    <mat-card-title>Waiting for game to start ...</mat-card-title>
-    <h4>Lobby: {{lobby?.name}}</h4>
-    <h4>Key: {{lobby?.key}}</h4>
-    <button mat-raised-button color="primary" (click)="leaveLobby()">Leave lobby</button>
   </mat-card>
 </div>
