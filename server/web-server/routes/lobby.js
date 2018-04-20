@@ -52,6 +52,26 @@ module.exports = function(database, webSocket) {
             res.status(200).send({'name': currentLobby.name, 'key': currentLobby.key});
         }
     });
+
+    /**
+     * Get current lobby
+     */
+    lobby.routes.route('/').get((req, res) => {
+        const uid = req.user._json.steamid;
+        var currentLobby = null;
+
+        webSocket.lobbies.forEach((lobby) => {
+            if(lobby.users.indexOf(uid) > -1) {
+                currentLobby = lobby;
+            }
+        });
+
+        if(currentLobby == null) {
+            res.status(406).send({'status': 'nok', 'error': 'No lobby available.'});
+        } else {
+            res.status(200).send({'name': currentLobby.name, 'key': currentLobby.key});
+        }
+    });
     
     return lobby;
 }

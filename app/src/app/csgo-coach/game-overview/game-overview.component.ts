@@ -24,18 +24,13 @@ export class GameOverviewComponent implements OnInit {
     private logger: LoggerService,
     private gameOverviewService: GameOverviewService,
   ) {
-    this.logger.log('Start application.');
-
-    this.gameOverviewService.getMapObservable().subscribe(data => {
-      this.mapInfo = data;
-    });
-
-    this.gameOverviewService.getPlayerObservable().subscribe(player => {
-      this.player = player;
-    });
+    this.gameOverviewService.getMapObservable().subscribe(data => this.mapInfo = data);
+    this.gameOverviewService.getPlayerObservable().subscribe(player => this.player = player);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.gameOverviewService.getLobby().then(lobby => this.lobby = lobby);    
+  }
 
   public createLobby(): void {
     if (this.lobbyName != null) {

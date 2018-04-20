@@ -27,6 +27,22 @@ export class GameOverviewService {
   }
 
   /**
+   * Get current lobby
+   */
+  public getLobby(): Promise<Lobby> {
+    return new Promise((resolve, reject) => {
+      this.http.get('/api/lobby')
+        .subscribe(result => {
+          if(result['error']) {
+            reject('error');
+          } else {
+            resolve(result as Lobby);
+          }
+        });
+    });
+  }
+
+  /**
    * Create a new lobby
    * @param lobbyName 
    */

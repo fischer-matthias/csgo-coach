@@ -12,7 +12,7 @@ module.exports = function(http) {
      */
     webSocket.init = function() {
         socket.on('connection', (socket) => {
-            logger.log('A user connected');
+            logger.log('User connected.');
 
             socket.on('room', (lobbyKey) => {
                 logger.log('User\'ll try to join a lobby with the key ' + lobbyKey + '.');
@@ -22,7 +22,7 @@ module.exports = function(http) {
             }); 
     
             socket.on('disconnect', () => {
-                logger.log('A user disconnected');
+                logger.log('User disconnected.');
             });
         });
     }
