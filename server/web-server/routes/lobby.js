@@ -40,7 +40,7 @@ module.exports = function(database, webSocket) {
      */
     lobby.routes.route('/').post((req, res) => {
         const uid = req.user._json.steamid;
-        const lobbyKey = req.body.name;
+        const lobbyKey = req.body.key;
 
         // join a lobby
         var currentLobby = webSocket.joinLobby(lobbyKey, uid);
@@ -60,16 +60,52 @@ module.exports = function(database, webSocket) {
         const uid = req.user._json.steamid;
         var currentLobby = null;
 
-        webSocket.lobbies.forEach((lobby) => {
-            if(lobby.users.indexOf(uid) > -1) {
-                currentLobby = lobby;
-            }
-        });
+        try {
+            webSocket.lobbies.forEach((lobby) => {
+                if(lobby.users.indexOf(uid) > -1) {
+                    currentLobby = lobby;
+                    throw BreakException;
+                }
+            });
+        } catch(e) {}
+
 
         if(currentLobby == null) {
             res.status(406).send({'status': 'nok', 'error': 'No lobby available.'});
         } else {
             res.status(200).send({'name': currentLobby.name, 'key': currentLobby.key});
+        }
+    });
+
+    /**
+     * Remove user of lobby
+     */
+    lobby.routes.route('/:lobbyKey').delete((req, res) => {
+        const uid = req.user._json.steamid;
+        const lobbyKey = req.params.lobbyKey;
+        var index = -1;
+
+        try {
+            webSocket.lobbies.forEach((lobby) => {
+                if(lobby.key == lobbyKey) {
+                    index = lobby.users.indexOf(uid);
+                    if(index > -1) {
+                        lobby.users.splice(index, 1);
+
+                        if(!lobby.users.length) {
+                            var lobbyIndex = webSocket.lobbies.indexOf(lobby);
+                            webSocket.lobbies.splice(lobbyIndex, 1);
+                        }
+                    }
+                    throw BreakException;
+                }
+            });
+        } catch(e) {}
+
+        if(index == -1) {
+            res.status(406).send({'status': 'nok', 'error': 'No lobby available.'});
+        } else {
+            res.status(200).send({'status': 'ok'});
         }
     });
     

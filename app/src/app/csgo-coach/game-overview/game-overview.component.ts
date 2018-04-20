@@ -49,4 +49,19 @@ export class GameOverviewComponent implements OnInit {
         });
     }
   }
+
+  public leaveLobby(): void {
+    if(this.lobby.key != null) {
+      this.gameOverviewService.leaveLobby(this.lobby.key)
+        .then((status) => {
+          if(status) {
+            this.lobby = null;
+            this.lobbyName = '';
+            this.lobbyKey = '';
+            this.mapInfo = null;
+            this.player = null;
+          }
+        });
+    }
+  }
 }

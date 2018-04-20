@@ -36,6 +36,7 @@ export class GameOverviewService {
           if(result['error']) {
             reject('error');
           } else {
+            this.initSocket(result['key']);
             resolve(result as Lobby);
           }
         });
@@ -75,6 +76,16 @@ export class GameOverviewService {
           resolve(result as Lobby);
         }
       });
+    });
+  }
+
+  public leaveLobby(lobbyKey): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      this.http.delete('/api/lobby/' + lobbyKey)
+        .subscribe(result => {
+          if(result['error']) resolve(false);
+          else resolve(true);
+        });
     });
   }
 

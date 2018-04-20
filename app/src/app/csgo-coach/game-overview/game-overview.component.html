@@ -3,6 +3,7 @@
   <mat-card class="csgo-card">
     <h4>Lobby: {{lobby?.name}}</h4>
     <h4>Key: {{lobby?.key}}</h4>
+    <button mat-raised-button color="primary" (click)="leaveLobby()">Leave lobby</button>
   </mat-card>
 
   <mat-card class="csgo-card">
@@ -51,5 +52,6 @@
     <mat-card-title>Waiting for game to start ...</mat-card-title>
     <h4>Lobby: {{lobby?.name}}</h4>
     <h4>Key: {{lobby?.key}}</h4>
+    <button mat-raised-button color="primary" (click)="leaveLobby()">Leave lobby</button>
   </mat-card>
 </div>
