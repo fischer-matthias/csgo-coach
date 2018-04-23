@@ -1,4 +1,4 @@
-module.exports = function(database) {
+module.exports = (database) => {
   const logger = require('../../utils/logger')();
   const teamModel = require('./team')(database);
 
@@ -10,7 +10,7 @@ module.exports = function(database) {
    * @param {*} _uid 
    * @param {*} _teamName 
    */
-  game.startSession = function(_uid, _teamName) {
+  game.startSession = (_uid, _teamName) => {
     return new Promise((resolve, reject) => {
       const team = teamModel
         .getTeam(_uid, _teamName)
@@ -30,7 +30,11 @@ module.exports = function(database) {
     });
   };
 
-  game.getMySessions = function(_uid) {
+  /**
+   * Returns every active session.
+   * @param {*} _uid 
+   */
+  game.getMySessions = (_uid) => {
     return new Promise((resolve, reject) => {
       game.sessions.forEach(session => {
         if(session.players.indexOf({uid: _uid}) > -1) {

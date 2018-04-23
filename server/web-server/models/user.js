@@ -1,4 +1,4 @@
-module.exports = function(database) {
+module.exports = (database) => {
   const logger = require('../../utils/logger')();
   const collection = 'User';
   const user = {};
@@ -6,7 +6,7 @@ module.exports = function(database) {
   /**
    * Login / Registration procedere
    */
-  user.verify = function(_uid) {
+  user.verify = (_uid) => {
     return new Promise((resolve, reject) => {
       user
         .exists(_uid)
@@ -24,7 +24,7 @@ module.exports = function(database) {
    * Verifies that a specific user is already exisiting.
    * @param {*} _uid
    */
-  user.exists = function(_uid) {
+  user.exists = (_uid) => {
     return new Promise((resolve, reject) => {
       const query = { uid: _uid };
       database
@@ -38,7 +38,7 @@ module.exports = function(database) {
    * Creates a new user.
    * @param {*} _uid
    */
-  user.create = function(_uid) {
+  user.create = (_uid) => {
     return new Promise((resolve, reject) => {
       const document = { uid: _uid, role: 'user' };
       database

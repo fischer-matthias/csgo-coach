@@ -1,4 +1,4 @@
-module.exports = function () {
+module.exports = () => {
 
     const express = require('express');
     const steam = require('steam-login');
@@ -12,7 +12,7 @@ module.exports = function () {
     webServer.database = require('../utils/database')();
     webServer.webSocket = require('./webSocket')(http);
 
-    webServer.init = function () {
+    webServer.init = () => {
 
         prepareLogging();
         prepareSessionHandling();
@@ -54,7 +54,7 @@ module.exports = function () {
     }
 
     function listen() {
-        http.listen(config.WEB_SERVER_PORT, function () {
+        http.listen(config.WEB_SERVER_PORT, () => {
             logger.log('Start web server on *:' + config.WEB_SERVER_PORT + '.');
         });
     }

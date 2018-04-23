@@ -1,4 +1,4 @@
-module.exports = function () {
+module.exports = () => {
     const express = require('express');
     const bodyParser = require('body-parser');
     const path = require('path');
@@ -14,7 +14,7 @@ module.exports = function () {
     staticFiles.routes.use(express.static(path.join(staticFiles.devDirectory, config.WEB_SERVER_INDEX_PATH)));
 
     // Simple static file routing
-    staticFiles.routes.route('/').get(function (req, res) {
+    staticFiles.routes.route('/').get((req, res) => {
         res.sendFile(path.join(staticFiles.devDirectory, config.WEB_SERVER_INDEX_PATH + 'index.html'));
     });
 

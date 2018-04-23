@@ -63,7 +63,7 @@
         "ammo_clip": 20,
         "ammo_clip_max": 20,
         "ammo_reserve": 120,
-        "state": "active"
+        "state": "holstered"
       },
       "weapon_2": {
         "name": "weapon_ak47",

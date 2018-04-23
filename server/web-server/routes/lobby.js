@@ -1,4 +1,4 @@
-module.exports = function(database, webSocket) {
+module.exports = (database, webSocket) => {
     
     const express = require('express');
     const logger = require('../../utils/logger')();

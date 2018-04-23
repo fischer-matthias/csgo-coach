@@ -67,9 +67,13 @@ module.exports = function(http) {
         try {
             webSocket.lobbies.forEach((lobby) => {
                 if(lobby.key == lobbyKey) {
-                    lobby.users.push(uid);
-                    retLobby = lobby;
-                    logger.log('User ' + uid + ' joined lobby ' + lobby.name + '.');
+                    
+                    if(lobby.users.length < 5) {
+                        lobby.users.push(uid);
+                        retLobby = lobby;
+                        logger.log('User ' + uid + ' joined lobby ' + lobby.name + '.');
+                    }
+
                     throw BreakException;
                 }
             });
